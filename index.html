@@ -514,7 +514,13 @@
 #patchHorror.stage-error .patch-horror-errors{animation:patchErrorFrame .13s steps(2) infinite}
 @keyframes patchErrorFrame{0%{text-shadow:-3px 0 #ff1444,3px 0 #14ff7e}50%{text-shadow:4px 0 #ff1444,-3px 0 #14ff7e}100%{text-shadow:none}}
 </style>
-</head>
+<style id="patch-v13-reboot-fix">
+.phone.patch-override-mode #kakaoApp,
+.phone.patch-override-mode #messagesApp,
+.phone.patch-override-mode #phoneApp,
+.phone.patch-override-mode #photosApp{display:none!important;visibility:hidden!important;pointer-events:none!important}
+.phone.patch-override-mode #home{display:block!important;visibility:visible!important}
+</style></head>
 <body>
 <div class="phone">
 <div class="wall"></div><div class="island"></div>
@@ -821,11 +827,19 @@ async function patchStartHorror(){
  patchSetHorrorStage('boot');
  await patchDelay(2200);
  localStorage.setItem(patchStateKey,'1');
- patchInstallOverride();
- if(current==='kakao')closeKakao();
- if(current==='messages')closeMessages();
- if(current==='phone')closePhone();
+ // Always dismiss every foreground app before revealing the corrupted home.
+ // `current` can already be 'home' even while Kakao is still visually active.
+ closeKakao();
+ $('messagesApp').classList.remove('active');
+ $('phoneApp').classList.remove('active');
+ $('photosApp').classList.remove('active');
+ $('kkChat').classList.remove('open');
+ document.querySelectorAll('#kakaoApp, #messagesApp, #phoneApp, #photosApp').forEach(app=>{
+  app.classList.remove('active');
+  app.style.display='none';
+ });
  show('home');
+ patchInstallOverride();
  patchSetHorrorStage('reveal');
  await patchDelay(1050);
  layer.className='patch-horror';
