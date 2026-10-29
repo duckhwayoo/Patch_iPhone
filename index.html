@@ -586,7 +586,7 @@
 <div id="patchCrash" aria-hidden="true"><pre id="patchCrashText"></pre><div class="red">ERROR ERROR ERROR</div></div>
 <div id="patchOverride">
 <button id="patchOverrideBack" hidden>‹ 홈</button>
-<div class="patch-override-heading"><span class="patch-terminal-indicator"></span> OVERRIDE_ <small>TRANSMISSION ACTIVE</small></div>
+<div class="patch-override-heading"><span class="patch-terminal-indicator"></span> LAST CONFESSION_ <small>TRANSMISSION ACTIVE</small></div>
 <div class="patch-lines" id="patchOverrideLines"></div>
 <div id="patchOverrideTapHint">▸ TAP TO CONTINUE_</div>
 <div id="patchOverrideEndError"><strong>FATAL EXCEPTION</strong><pre></pre></div>
@@ -610,7 +610,7 @@ function patchSetHorrorStage(stage){
 }
 function patchInstallOverride(){
  if(!document.getElementById('patchOverrideAppIcon')){
-  const b=makeApp('OVERRIDE');
+  const b=makeApp('LAST CONFESSION');
   b.id='patchOverrideAppIcon';
   b.querySelector('.appicon').innerHTML='<span class="patch-override-icon">⌁<small>ERR</small></span>';
   b.querySelector('.appicon').style.background='#090b0d';
@@ -722,7 +722,7 @@ async function patchOverrideEnd(runId){
  let output='';
  for(let i=0;i<32;i++){
   if(runId!==patchOverrideRunId)return;
-  output+=(i%3===0?'> OVERRIDE ERROR / MEMORY FAULT\n':'')+Array.from({length:35},()=>Math.random()>.5?'1':'0').join('')+'\n';
+  output+=(i%3===0?'> LAST CONFESSION ERROR / MEMORY FAULT\n':'')+Array.from({length:35},()=>Math.random()>.5?'1':'0').join('')+'\n';
   err.querySelector('pre').textContent=output.slice(-1800);
   await patchOverrideWait(75);
  }
