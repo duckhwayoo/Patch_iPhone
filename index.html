@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cheat iPhone — iOS Home</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#181b22;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:white}.phone{width:min(390px,100vw);height:min(844px,100dvh);position:relative;overflow:hidden;border:7px solid #101115;border-radius:48px;background:#283a70;box-shadow:0 18px 70px #0008}.wall{position:absolute;inset:0;background:radial-gradient(ellipse at 25% 80%,#f9a3a4 0%,transparent 44%),radial-gradient(ellipse at 80% 30%,#82a5ed 0%,transparent 48%),linear-gradient(155deg,#15295e,#745ba6 55%,#e78ba6);filter:saturate(1.2)}.wall:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0003,transparent 35%,#0003)}.status{position:absolute;top:13px;left:0;right:0;display:flex;justify-content:space-between;padding:0 28px;font-size:14px;font-weight:650;z-index:4}.island{position:absolute;z-index:5;top:8px;left:50%;transform:translateX(-50%);width:112px;height:30px;background:#09090c;border-radius:25px}.view{position:absolute;inset:0;z-index:2;transition:opacity .3s,transform .3s}.hidden{opacity:0;pointer-events:none;transform:translateY(20px)}#lock{text-align:center;cursor:pointer}.lockicon{margin-top:65px;font-size:21px}.date{margin-top:28px;font-size:20px;font-weight:500}.clock{font-size:clamp(70px,20vw,86px);letter-spacing:-5px;font-weight:650;line-height:1.13}.lockbottom{position:absolute;bottom:36px;left:0;right:0;display:flex;align-items:center;justify-content:space-around}.circle{width:49px;height:49px;border-radius:50%;background:#17192377;display:grid;place-items:center;font-size:23px}.hint{position:absolute;bottom:112px;left:0;right:0;font-size:14px}.homebar{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);width:125px;height:5px;border-radius:8px;background:white;z-index:8;cursor:pointer}#pass{text-align:center;backdrop-filter:blur(24px);background:#16224d44}.passTitle{margin-top:125px;font-size:21px;font-weight:550}.dots{display:flex;justify-content:center;gap:18px;margin:22px 0 30px}.dot{height:13px;width:13px;border:1.5px solid white;border-radius:50%}.dot.on{background:white}.error{height:23px;font-size:13px;color:#fff}.keypad{display:grid;grid-template-columns:repeat(3,76px);justify-content:center;gap:14px 23px;margin-top:10px}.key{border:0;border-radius:50%;width:76px;height:76px;background:#ffffff36;color:white;font-size:32px;font-weight:350;cursor:pointer}.key:active{background:#ffffff88}.key.small{font-size:15px;background:transparent}.key.empty{visibility:hidden}#home{padding:65px 17px 25px}.widgets{display:flex;gap:12px;margin:12px 0 24px}.widget{background:#ffffff3b;backdrop-filter:blur(18px);border:1px solid #ffffff45;border-radius:20px;padding:15px;flex:1;height:112px}.widget strong{display:block;font-size:29px;margin-top:5px}.widget small{font-size:12px}.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 10px}.app{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;background:none;color:white;font-size:11px;text-shadow:0 1px 3px #0006;cursor:pointer}.appicon{overflow:hidden;width:59px;height:59px;border-radius:15px;display:grid;place-items:center;font-size:27px;box-shadow:0 3px 9px #0002;background:#fff;color:#222;text-shadow:none}.dock{position:absolute;bottom:26px;left:12px;right:12px;display:flex;justify-content:space-around;background:#ffffff50;backdrop-filter:blur(22px);border-radius:27px;padding:11px 5px}.appicon svg,.appicon img{width:100%;height:100%;display:block}.appicon img{object-fit:cover}.dock .app span:last-child{display:none}.dock .appicon{width:60px;height:60px}.toast{position:absolute;z-index:10;top:70px;left:22px;right:22px;border-radius:18px;background:#ffffffdc;color:#222;padding:15px;text-align:center;font-size:14px;box-shadow:0 5px 20px #0003;display:none}.lockbtn{position:absolute;right:16px;top:105px;border:1px solid #ffffff80;background:#ffffff30;color:white;border-radius:20px;padding:7px 12px;font-size:12px;cursor:pointer}@media(max-width:450px){.phone{border:0;border-radius:0;width:100vw;height:100dvh}.clock{font-size:82px}}@media(max-height:700px){.widgets{margin-bottom:15px}.apps{gap:12px 8px}.appicon{width:49px;height:49px}.dock .appicon{width:50px;height:50px}.keypad{gap:6px 20px}.key{width:66px;height:66px}.passTitle{margin-top:85px}}
+
+/* V5: realistic iOS-style status indicators and lock-screen shortcuts */
+.status{top:17px;left:0;right:0;padding:0 25px;align-items:center;font-size:14px;letter-spacing:-.15px;pointer-events:none}
+.status-left,.status-right{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.status-left{gap:8px}.status-right{gap:7px}.status svg{display:block;flex:none}
+.status .carrier{font-weight:600}.status .battery-number{font-size:11px;font-weight:750;fill:white}
+.lockbottom{bottom:39px;justify-content:space-between;padding:0 29px;z-index:6;pointer-events:none}
+.lockbottom .circle{width:51px;height:51px;border:1px solid #ffffff42;background:rgba(30,32,38,.34);backdrop-filter:blur(15px) saturate(140%);-webkit-backdrop-filter:blur(15px) saturate(140%);box-shadow:inset 0 1px 1px #ffffff36,0 3px 12px #0002;color:white;cursor:pointer;pointer-events:auto;padding:0;transition:transform .12s,background .15s}
+.lockbottom .circle:active{transform:scale(.93);background:#ffffff55}.lockbottom .circle svg{width:26px;height:26px;display:block}
+.lockbottom .circle.active{background:#f8f8f8d9;color:#1d1d1f}
+@media(max-height:700px){.lockbottom{bottom:34px}}
+
+/* V6 Phone app */
+#phoneApp{position:absolute;inset:0;z-index:7;background:#fff;color:#08090c;display:none;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}#phoneApp.active{display:block}.phone .status.inphone{z-index:9;color:#000}.phone .status.inphone .carrier{display:none}.phone .status.inphone .status-left:before{content:attr(data-time);font-size:15px;color:#000;font-weight:700}.phone .status.inphone svg path[stroke=white],.phone .status.inphone svg rect[stroke=white]{stroke:#000}.phone .status.inphone .status-right svg{filter:brightness(0)}.phone .status.inphone .status-left svg{display:none}.phone .island.inphone{display:none}#phoneApp button{font-family:inherit;cursor:pointer}#phoneApp .phead{position:absolute;top:61px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;height:45px}#phoneApp .ptitle{font-size:21px;font-weight:750}#phoneApp .pglass{border:1px solid #dedee1;background:linear-gradient(145deg,#fff,#f6f6f7);border-radius:30px;min-width:49px;height:43px;padding:0 14px;font-size:17px;color:#111}#phoneApp .pbody{position:absolute;top:118px;bottom:95px;left:0;right:0;overflow:auto;overscroll-behavior:contain}#phoneApp .pnav{position:absolute;bottom:20px;left:15px;right:15px;height:66px;display:flex;gap:8px;align-items:stretch;z-index:2}#phoneApp .pnavmain{flex:1;display:flex;border:1px solid #ddd;background:#fafafadf;backdrop-filter:blur(20px);border-radius:40px;padding:4px}#phoneApp .pnavmain button{flex:1;border:0;background:transparent;border-radius:32px;color:#161616;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}#phoneApp .pnavmain button.sel{background:#e9e9eb;color:#0787f7}#phoneApp .pnavmain .navico{font-size:23px;line-height:25px;font-weight:700}#phoneApp .psearch{width:62px;border:1px solid #ddd;background:#fafafa;border-radius:50%;font-size:27px}#phoneApp .prow{min-height:78px;display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #ececef;text-align:left}#phoneApp .avatar{width:49px;height:49px;border-radius:50%;background:linear-gradient(#abc8e8,#7d87c4);color:#fff;display:grid;place-items:center;flex-shrink:0;font-size:23px;font-weight:650}#phoneApp .pinfo{flex:1;min-width:0}#phoneApp .pname{font-size:18px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#phoneApp .psub{font-size:13px;color:#929297;margin-top:2px}#phoneApp .ptime{font-size:13px;color:#929297}#phoneApp .pcallbtn{width:40px;height:40px;border:0;border-radius:50%;background:#f3f3f5;color:#0787f7;font-size:22px}#phoneApp .pmissed{color:#f34a50}#phoneApp .pcontactrow{width:100%;border:0;background:#fff}#phoneApp .psection{padding:14px 18px 7px;font-size:14px;color:#888;font-weight:650}#phoneApp .pstar{font-size:20px;color:#ffb500;margin-right:5px}#phoneApp .palpha{position:sticky;top:0;background:#f8f8f9;padding:5px 18px;font-size:13px;font-weight:700;color:#85858a}#phoneApp .pkeyscreen{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:7px}#phoneApp .pnumber{height:72px;font-size:31px;display:flex;align-items:center;justify-content:center;max-width:100%;word-break:break-all}#phoneApp .pkeys{display:grid;grid-template-columns:repeat(3,72px);gap:13px 24px;justify-content:center}#phoneApp .pkey{height:72px;width:72px;border-radius:50%;border:1px solid #dedee1;background:#fff;color:#050505;font-size:38px;font-weight:350;display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1}#phoneApp .pkey small{font-size:10px;font-weight:750;letter-spacing:3px;margin-top:3px}#phoneApp .pkey:active{background:#e9e9eb}#phoneApp .pcallgreen{height:72px;width:72px;border-radius:50%;border:0;background:#30ce60;color:#fff;font-size:34px;margin:13px auto 0;display:block}#phoneApp .pdelete{position:absolute;right:35px;bottom:6px;border:0;background:transparent;font-size:24px}#phoneApp .pdetail{min-height:100%;background:linear-gradient(160deg,#a1b4d1,#555f9c 58%,#453e90);color:white;padding:22px 17px}#phoneApp .pdetail .avatar{height:155px;width:155px;margin:32px auto 14px;font-size:72px;border:2px solid #ffffff70}#phoneApp .pdetail h2{text-align:center;font-size:28px;margin:0 0 16px}#phoneApp .pactions{display:flex;justify-content:center;gap:11px;margin:20px 0}#phoneApp .pactions button{height:61px;width:61px;border-radius:50%;border:1px solid #ffffff50;background:#ffffff22;color:#fff;font-size:25px}#phoneApp .pdetailcard{padding:15px;border-radius:24px;background:#747bd080;margin:10px 0;font-size:15px;line-height:1.7}#phoneApp .pdetailcard b{display:block;font-weight:500}#phoneApp .pdetailcard span{font-size:18px}#phoneApp .pdetail .back{border:1px solid #ffffff70;border-radius:50%;background:#ffffff20;color:white;width:38px;height:38px;font-size:24px}#phoneApp .pincall{position:absolute;inset:0;z-index:4;background:linear-gradient(160deg,#657895,#34355f);color:#fff;text-align:center;padding-top:130px}#phoneApp .pincall .avatar{width:115px;height:115px;font-size:52px;margin:0 auto 25px}#phoneApp .pincall h2{font-size:30px}#phoneApp .pincall .end{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);border:0;border-radius:50%;height:80px;width:80px;background:#f0484e;color:#fff;font-size:35px}#phoneApp .pempty{padding:20px;color:#888}#phoneApp .psearchinput{display:block;margin:14px auto;padding:12px 16px;width:90%;border-radius:15px;background:#f3f3f5;border:0;font-size:17px}#phoneApp .pbody:has(.pkeyscreen){overflow:hidden}@media(max-height:720px){#phoneApp .pkeys{grid-template-columns:repeat(3,60px);gap:7px 24px}#phoneApp .pkey{height:60px;width:60px}#phoneApp .pcallgreen{height:58px;width:58px;margin-top:8px}#phoneApp .pnumber{height:50px}}
+</style>
+<style id="v7style">
+/* V7 iOS Phone refinements */
+#phoneApp .phead{top:58px;height:51px;left:16px;right:16px}#phoneApp .pglass{border:1px solid #d5d5d9;border-radius:100px;background:linear-gradient(160deg,#fff,#f8f8f9);box-shadow:inset 0 1px 1px #fff,0 1px 2px #00000008;font-size:17px;min-width:52px;height:46px}#phoneApp .ptitle{font-size:21px;font-weight:750}#phoneApp .pbody{top:119px;bottom:94px}#phoneApp .pnav{bottom:20px;height:65px}#phoneApp .pnavmain{background:#ffffffb8;border:1px solid #d8d8dc;box-shadow:0 0 8px #00000008;backdrop-filter:blur(24px)}#phoneApp .pnavmain button.sel{background:#e6e6e9;color:#0088ff}#phoneApp .pnavmain .navico{height:27px;display:grid;place-items:center}#phoneApp .pnavmain .navico svg{width:25px;height:25px}#phoneApp .psearch{background:#ffffffb8;backdrop-filter:blur(22px)}#phoneApp .psearch svg{width:27px;height:27px}#phoneApp .prow{min-height:73px}#phoneApp .prow:not(.pcontactrow){cursor:default}#phoneApp .prow[data-inert="true"],#phoneApp .pcontactrow[data-inert="true"]{cursor:default}#phoneApp .pcontactrow[data-inert="true"]:active{background:#fff}#phoneApp .pdetail{min-height:100%;padding:22px 17px 110px;background:linear-gradient(160deg,#a3b6d1 0%,#7888b3 34%,#575e9d 69%,#47438d 100%)}#phoneApp .pdetail .avatar{width:155px;height:155px;margin:38px auto 12px;background:linear-gradient(150deg,#9fb9d8,#7484b1);border:2px solid #ffffff75;box-shadow:inset 0 1px 10px #ffffff40,0 2px 6px #00000013}#phoneApp .pdetail h2{font-size:29px;margin:0 0 16px}#phoneApp .pdetail .back{background:#ffffff15;border:1px solid #ffffff80}#phoneApp .pactions{gap:10px;margin:20px 0}#phoneApp .pactions button{display:grid;place-items:center;height:62px;width:62px;border:1px solid #ffffff6e;background:#ffffff1d;box-shadow:inset 0 1px 3px #ffffff20}#phoneApp .pactions svg{width:29px;height:29px;fill:#fff}#phoneApp .pactions button:disabled{opacity:.45;cursor:default}#phoneApp .pdetailcard{background:#6973c4a6;padding:15px 16px;border-radius:24px;margin:9px 0}#phoneApp .pdetailcard span{font-size:19px}#phoneApp .pdetailcard .callnumber{color:#fff;text-decoration:none;background:none;border:0;padding:0;font:inherit;text-align:left}#phoneApp .pdetailcard .callnumber:hover{text-decoration:underline}#phoneApp .pdetail .heartavatar{font-size:75px;font-weight:600;color:#fff}#phoneApp .pincall{inset:0;background:linear-gradient(165deg,#8798b2 0%,#5b6c94 48%,#303959 100%);padding:0;display:flex;align-items:center;flex-direction:column}#phoneApp .pincall .calltop{margin-top:clamp(110px,20vh,165px);text-align:center}#phoneApp .pincall .avatar{width:112px;height:112px;margin:0 auto 24px;background:#ffffff28;border:1px solid #ffffff75;font-size:52px}#phoneApp .pincall h2{font-size:32px;margin:0 0 7px}#phoneApp .pincall .callstate{font-size:17px;color:#f2f2f5;margin:0}#phoneApp .pincall .calltools{position:absolute;bottom:175px;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 45px}#phoneApp .pincall .calltool{display:flex;align-items:center;flex-direction:column;gap:8px;font-size:12px}#phoneApp .pincall .calltool span{height:57px;width:57px;border-radius:50%;background:#ffffff28;display:grid;place-items:center;font-size:23px}#phoneApp .pincall .end{bottom:66px;height:72px;width:72px;background:#f13d46;display:grid;place-items:center;box-shadow:0 4px 14px #0002}#phoneApp .pincall .end svg{height:32px;width:32px;transform:rotate(135deg)}#phoneApp .subtitle{position:absolute;bottom:275px;left:16px;right:16px;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;pointer-events:none}#phoneApp .subtitle span{display:inline-block;max-width:100%;padding:9px 14px;background:#0009;color:#fff;border-radius:10px;font-size:16px;line-height:1.5;box-shadow:0 2px 10px #0002}#phoneApp .taphelp{position:absolute;bottom:255px;font-size:12px;opacity:.8}#phoneApp .pincall .phead{display:none}#phoneApp .pkeyscreen{padding-bottom:8px}#phoneApp .pkeys{gap:13px 24px}#phoneApp .pkey{box-shadow:inset 0 2px 5px #00000006;background:linear-gradient(155deg,#fff,#fdfdfd)}#phoneApp .pdetail .back svg{height:23px;width:23px}#phoneApp .callarrow{font-size:18px;color:#8e8e93;margin-right:3px}#phoneApp .pcallbtn{display:grid;place-items:center}#phoneApp .pcallbtn svg{width:22px;height:22px;fill:#0787f7}#phoneApp .pcallbtn:disabled{opacity:.45}#phoneApp .pcontactrow:disabled{opacity:1;color:inherit}#phoneApp .pnavmain button svg{stroke:currentColor}#phoneApp .pincall .subtitle{z-index:5}
+@media(max-height:740px){#phoneApp .pincall .calltop{margin-top:100px}#phoneApp .pincall .calltools{bottom:145px}#phoneApp .subtitle{bottom:237px}#phoneApp .pincall .end{bottom:48px}}
+</style>
+
+<style id="v8-call-fix">
+/* Full-bleed iOS-style call view; do not inherit scrolling list bounds */
+#phoneApp .pbody:has(.pincall){top:0!important;bottom:0!important;overflow:hidden!important;z-index:3}
+#phoneApp .pincall{position:absolute!important;inset:0!important;width:100%;height:100%;overflow:hidden;color:#fff;background:radial-gradient(ellipse at 48% 90%,#56601f 0%,#494d21 37%,transparent 78%),linear-gradient(155deg,#5c493c 0%,#514b39 40%,#404b26 100%);display:block!important;touch-action:manipulation}
+#phoneApp .pincall .calltop{position:absolute;top:clamp(105px,15%,155px);left:12px;right:12px;margin:0!important;text-align:center}
+#phoneApp .pincall .calltop .avatar{display:none!important}
+#phoneApp .pincall .calltop h2{font-size:clamp(32px,9vw,38px);font-weight:650;line-height:1.2;margin:0!important;letter-spacing:-1.1px;color:white}
+#phoneApp .pincall .callstate{font-size:19px;line-height:1.3;font-weight:500;color:#e5e3d8b8;margin:0 0 7px!important;transition:opacity .3s ease}
+#phoneApp .pincall .callstate.switching{opacity:0}
+#phoneApp .pincall .calltools{position:absolute;bottom:clamp(72px,10%,110px)!important;left:0;right:0;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 15px!important;padding:0 24px!important;max-width:420px;margin:auto}
+#phoneApp .pincall .calltool{font-size:15px!important;gap:8px!important;line-height:1.2;color:#fff;text-align:center;user-select:none}
+#phoneApp .pincall .calltool span{width:clamp(65px,20vw,76px)!important;height:clamp(65px,20vw,76px)!important;border-radius:50%;border:1px solid #ffffff38;background:#ffffff27;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:grid;place-items:center;box-shadow:inset 0 1px 1px #ffffff30}
+#phoneApp .pincall .calltool span svg{width:34px;height:34px;stroke:white;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#phoneApp .pincall .calltool.muted span{background:#ffffff66}
+#phoneApp .pincall .calltool .endcall{background:#f20d14!important;border-color:#f35b5e!important}
+#phoneApp .pincall .calltool .endcall svg{width:38px;height:38px;fill:white;stroke:white}
+#phoneApp .pincall .calltool button{border:0;background:none;color:inherit;font:inherit;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px}
+#phoneApp .pincall .end{display:none!important}
+#phoneApp .pincall .subtitle{position:absolute;top:clamp(235px,31%,320px)!important;bottom:auto!important;left:24px;right:24px;min-height:70px;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:5}
+#phoneApp .pincall .subtitle span{background:none!important;box-shadow:none!important;padding:0!important;border:0!important;border-radius:0!important;color:white;font-size:clamp(17px,4.7vw,21px);font-weight:550;line-height:1.55;letter-spacing:-.3px;text-align:center;text-shadow:0 1px 6px #0007;max-width:340px;opacity:0;transform:translateY(9px);transition:opacity .45s ease,transform .45s ease}
+#phoneApp .pincall .subtitle span.visible{opacity:1;transform:translateY(0)}
+#phoneApp .pincall .taphelp{display:none!important}
+#phoneApp .pincall.ending .calltools{pointer-events:none;opacity:.4;transition:opacity .25s}
+@media(max-height:690px){#phoneApp .pincall .calltools{bottom:48px!important;gap:13px!important}#phoneApp .pincall .calltool span{width:61px!important;height:61px!important}#phoneApp .pincall .calltop{top:105px}}
+</style>
+
+<style id="v9-call-polish">
+/* More restrained typography, matching the reference iPhone call screen. */
+#phoneApp .pincall .calltop h2 {
+  font-size: clamp(27px, 7.5vw, 32px) !important;
+  font-weight: 570 !important;
+  letter-spacing: -0.7px !important;
+}
+#phoneApp .pincall .callstate {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+#phoneApp .pincall .calltools {
+  gap: 21px 12px !important;
+  padding: 0 29px !important;
+}
+#phoneApp .pincall .calltool {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  gap: 7px !important;
+}
+#phoneApp .pincall .calltool span {
+  width: clamp(57px, 17vw, 67px) !important;
+  height: clamp(57px, 17vw, 67px) !important;
+}
+#phoneApp .pincall .calltool span svg {
+  width: 28px !important;
+  height: 28px !important;
+  stroke-width: 2.1 !important;
+}
+#phoneApp .pincall .calltool .endcall svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+#phoneApp .pincall .subtitle {
+  top: clamp(228px, 30%, 305px) !important;
+  left: 24px !important;
+  right: 24px !important;
+}
+#phoneApp .pincall .subtitle span {
+  font-size: clamp(15px, 4.1vw, 17px) !important;
+  font-weight: 430 !important;
+  line-height: 1.65 !important;
+  letter-spacing: -0.35px !important;
+  max-width: 100% !important;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  white-space: normal;
+}
+#phoneApp .pincall .subtitle span .lyric-line {
+  display:block;
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
+  font:inherit;
+}
+@media (max-height:690px) {
+  #phoneApp .pincall .calltool span {width:56px!important;height:56px!important}
+}
+</style>
+
+
+<style id="v10-messages-style">
+#messagesApp{position:absolute;inset:0;z-index:7;background:#fff;color:#090909;display:none;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+#messagesApp.active{display:block}
+#messagesApp button{font:inherit;cursor:pointer}
+#messagesApp .m-head{position:absolute;top:60px;left:16px;right:16px;display:flex;align-items:center;justify-content:space-between;z-index:1}
+#messagesApp .m-glass{height:44px;min-width:58px;padding:0 14px;border-radius:28px;border:1px solid #d9d9dd;background:linear-gradient(155deg,#fff,#f7f7f8);box-shadow:inset 0 1px #fff,0 1px 2px #00000008;color:#111;font-size:17px}
+#messagesApp .m-filter{width:46px;min-width:46px;display:grid;place-items:center;padding:0}
+#messagesApp .m-title{position:absolute;top:118px;left:19px;font-size:34px;letter-spacing:-1.25px;font-weight:750;line-height:1.15}
+#messagesApp .m-list{position:absolute;top:181px;bottom:92px;left:0;right:0;overflow:auto;overscroll-behavior:contain}
+#messagesApp .m-row{display:flex;align-items:center;min-height:76px;padding:7px 17px 7px 20px;gap:11px}
+#messagesApp .m-avatar{height:46px;width:46px;border-radius:50%;flex:none;background:linear-gradient(160deg,#aacbe9,#7d83c2);display:grid;place-items:center;color:#fff;font-size:23px;font-weight:650}
+#messagesApp .m-avatar svg{width:38px;height:38px}
+#messagesApp .m-content{min-width:0;flex:1;align-self:stretch;padding:6px 0 10px;border-bottom:1px solid #e8e8eb}
+#messagesApp .m-top{display:flex;align-items:baseline;gap:8px;min-width:0}
+#messagesApp .m-name{font-size:16px;font-weight:650;letter-spacing:-.35px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#messagesApp .m-date{color:#909095;font-size:13px;white-space:nowrap}
+#messagesApp .m-arrow{color:#c4c4c8;font-size:24px;line-height:15px;margin-left:1px;font-weight:300}
+#messagesApp .m-preview{font-size:14px;color:#929297;line-height:1.35;margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:keep-all;overflow-wrap:anywhere}
+#messagesApp .m-unread{width:8px;height:8px;background:#0a84ff;border-radius:50%;position:absolute;left:6px}
+#messagesApp .m-bottom{position:absolute;bottom:24px;left:17px;right:17px;height:53px;display:flex;gap:9px;align-items:center}
+#messagesApp .m-searchbar{height:53px;border:1px solid #dedee2;border-radius:35px;background:#f9f9faeb;display:flex;align-items:center;justify-content:space-between;padding:0 18px;flex:1;min-width:0}
+#messagesApp .m-searchbar svg{height:24px;width:24px;stroke:#111;stroke-width:2;fill:none}
+#messagesApp .m-compose{height:53px;width:53px;border:1px solid #dedee2;border-radius:50%;background:#f9f9faeb;display:grid;place-items:center}
+#messagesApp .m-compose svg{width:25px;height:25px;stroke:#111;fill:none;stroke-width:2}
+#messagesApp .m-placeholder{color:#999;font-size:14px;display:none}
+@media(max-height:680px){#messagesApp .m-list{top:172px}#messagesApp .m-title{top:115px;font-size:31px}}
+</style>
+
+
+<style id="v12-conversations">
+#messagesApp .m-row[data-thread]{cursor:pointer}
+#messagesApp .m-row[data-thread]:active{background:#f5f5f7}
+#messagesApp .m-conversation{position:absolute;inset:0;z-index:4;background:#fff;display:none}
+#messagesApp .m-conversation.open{display:block}
+#messagesApp .m-thread-header{position:absolute;top:50px;left:0;right:0;height:137px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:8px;background:linear-gradient(180deg,#fafafbec 0%,#f6f6f7e6 85%,#ffffffb3 100%);backdrop-filter:blur(17px);-webkit-backdrop-filter:blur(17px)}
+#messagesApp .m-back{position:absolute;top:18px;left:17px;width:62px;height:43px;border-radius:28px;border:1px solid #d1d1d6;background:#ffffffb8;display:flex;align-items:center;justify-content:center;gap:6px;color:#000;font-size:21px}
+#messagesApp .m-back svg{width:19px;height:23px;stroke:currentColor;stroke-width:2.8;fill:none}
+#messagesApp .m-back small{font-size:13px;background:#171717;color:#fff;border-radius:50%;min-width:19px;height:19px;display:grid;place-items:center}
+#messagesApp .m-thread-avatar{margin-top:0;width:60px;height:60px;border-radius:50%;background:linear-gradient(160deg,#accbe8,#8084c5);display:grid;place-items:center;color:#fff;font-size:31px}
+#messagesApp .m-thread-avatar svg{width:51px;height:51px}
+#messagesApp .m-thread-name{margin-top:4px;border:1px solid #d4d4d8;border-radius:25px;padding:4px 15px;font-size:16px;font-weight:650;background:#ffffffbb;max-width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#messagesApp .m-thread-name:after{content:'›';color:#aaa;margin-left:6px}
+#messagesApp .m-thread-scroll{position:absolute;top:185px;bottom:90px;left:0;right:0;overflow:auto;padding:12px 17px 12px;overscroll-behavior:contain;scrollbar-width:thin}
+#messagesApp .m-day{font-size:12px;color:#96969d;text-align:center;margin:15px 0 12px}
+#messagesApp .m-bubble-row{display:flex;margin:4px 0;max-width:100%}
+#messagesApp .m-bubble-row.out{justify-content:flex-end}
+#messagesApp .m-bubble-row.in{justify-content:flex-start}
+#messagesApp .m-bubble{font-size:16px;line-height:1.34;letter-spacing:-.25px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:break-word;max-width:83%;border-radius:19px;padding:9px 13px}
+#messagesApp .m-bubble-row.out .m-bubble{background:#34d65c;color:white;border-bottom-right-radius:6px}
+#messagesApp .m-bubble-row.in .m-bubble{background:#e9e9eb;color:#111;border-bottom-left-radius:6px}
+#messagesApp .m-bubble.web{font-size:14px;line-height:1.43}
+#messagesApp .m-thread-bottom{position:absolute;bottom:22px;left:15px;right:15px;height:48px;display:flex;align-items:center;gap:9px}
+#messagesApp .m-plus{border:1px solid #d9d9dd;border-radius:50%;width:42px;height:42px;flex:none;background:#fdfdfd;font-size:30px;font-weight:300;line-height:1}
+#messagesApp .m-composebox{border:1px solid #dedee3;border-radius:25px;height:45px;flex:1;display:flex;align-items:center;justify-content:space-between;min-width:0;padding:0 13px;color:#b3b3b8;font-size:15px}
+#messagesApp .m-composebox svg{width:21px;height:21px;stroke:#a8a8b0;fill:none;stroke-width:2}
+#messagesApp .m-thread-head-spacer{height:10px}
+@media(max-height:690px){#messagesApp .m-thread-header{height:120px}#messagesApp .m-thread-avatar{width:50px;height:50px}#messagesApp .m-thread-scroll{top:170px}}
+</style>
+<style id="v13-photos-css">
+#photosApp{position:absolute;inset:0;z-index:7;display:none;background:#fff;color:#101010;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}#photosApp.active{display:block}
+#photosApp .ph-scroll{position:absolute;inset:0 0 91px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}#photosApp .ph-scroll::-webkit-scrollbar{display:none}
+#photosApp .ph-hero{position:relative;height:185px;display:flex;align-items:flex-end;padding:0 15px 18px;box-sizing:border-box;background:#fff}
+#photosApp .ph-hero h1{font-size:34px;font-weight:760;letter-spacing:-1.3px;margin:0;line-height:1.1}#photosApp .ph-count{font-size:16px;font-weight:650;margin-top:6px}
+#photosApp .ph-actions{position:absolute;right:15px;bottom:20px;display:flex;gap:10px}#photosApp .ph-round{height:43px;border-radius:26px;border:1px solid #dadadd;background:#f8f8f9dd;box-shadow:inset 0 1px #fff;display:grid;place-items:center;padding:0 15px;color:#161616;font-size:16px;font-weight:600}#photosApp .ph-round.ph-filter{width:44px;padding:0}#photosApp .ph-round svg{height:23px;width:23px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round}
+#photosApp .ph-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:#fff}#photosApp .ph-cell{width:100%;aspect-ratio:1/1;overflow:hidden;background:#e9e9ec}#photosApp .ph-cell img{width:100%;height:100%;object-fit:cover;display:block}
+#photosApp .ph-empty{padding:45px 25px;text-align:center;color:#8e8e93;font-size:15px;line-height:1.6}
+#photosApp .ph-nav{position:absolute;bottom:19px;left:14px;right:14px;height:60px;display:flex;gap:9px;align-items:center;justify-content:space-between;pointer-events:none}#photosApp .ph-tabs{pointer-events:auto;display:flex;align-items:center;border:1px solid #d9d9df;background:#fffffff0;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:36px;height:58px;padding:4px;min-width:235px;box-shadow:0 1px 3px #0000000d}
+#photosApp .ph-tab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:51px;border:0;background:none;border-radius:29px;font-size:11px;color:#151515;font-weight:500;padding:0 7px}#photosApp .ph-tab.selected{background:#e9e9ec;color:#0084ff}#photosApp .ph-tab svg{height:23px;width:25px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+#photosApp .ph-search{pointer-events:auto;width:59px;height:59px;border:1px solid #dadade;border-radius:50%;background:#fffffff0;display:grid;place-items:center}#photosApp .ph-search svg{width:27px;height:27px;stroke:#111;stroke-width:2.6;fill:none}
+@media(max-width:360px){#photosApp .ph-hero h1{font-size:31px}#photosApp .ph-count{font-size:14px}#photosApp .ph-actions{gap:6px}}
+</style><style id="v14-kakao-css">
+#kakaoApp{position:absolute;inset:0;z-index:7;display:none;color:#161616;background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;overflow:hidden}#kakaoApp.active{display:block}
+#kakaoApp button{font:inherit;border:0;cursor:pointer;color:inherit;background:transparent}#kakaoApp .kk-inbox{position:absolute;inset:0;background:#fff}#kakaoApp .kk-titlebar{position:absolute;top:65px;left:17px;right:17px;height:48px;display:flex;align-items:center;justify-content:space-between}#kakaoApp .kk-title{font-size:25px;font-weight:740;letter-spacing:-.8px}#kakaoApp .kk-icons{display:flex;gap:19px;align-items:center}#kakaoApp .kk-icons svg{width:23px;height:23px;stroke:#151515;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#kakaoApp .kk-chips{position:absolute;top:124px;left:17px;right:12px;display:flex;gap:6px;overflow:hidden;white-space:nowrap}#kakaoApp .kk-chip{padding:10px 15px;border-radius:25px;background:#f2f2f2;font-size:14px;font-weight:650;white-space:nowrap}#kakaoApp .kk-chip.active{background:#191919;color:#fff}#kakaoApp .kk-inbox-list{position:absolute;top:186px;left:0;right:0;bottom:70px;overflow:auto}#kakaoApp .kk-row{width:100%;display:flex;align-items:center;gap:12px;padding:12px 18px;text-align:left;min-height:80px}#kakaoApp .kk-profile{width:53px;height:53px;border-radius:19px;background:#9cd0f6;display:grid;place-items:center;flex:none}#kakaoApp .kk-profile svg{width:38px;height:38px}#kakaoApp .kk-row-main{flex:1;min-width:0}#kakaoApp .kk-row-top{display:flex;align-items:center;gap:6px}#kakaoApp .kk-row-name{font-size:17px;font-weight:660;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#kakaoApp .kk-pin{font-size:13px;color:#929292;transform:rotate(35deg)}#kakaoApp .kk-preview{font-size:14px;color:#969696;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#kakaoApp .kk-row-time{font-size:11px;color:#989898;align-self:flex-start;margin-top:5px}#kakaoApp .kk-tabbar{position:absolute;bottom:0;left:0;right:0;height:69px;background:#fff;border-top:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-around;padding:0 5px 13px}#kakaoApp .kk-tabbar button{display:flex;align-items:center;justify-content:center;min-width:45px;color:#bababa}#kakaoApp .kk-tabbar button.selected{color:#242424}#kakaoApp .kk-tabbar svg{width:26px;height:26px;fill:currentColor}
+#kakaoApp .kk-chat{display:none;position:absolute;inset:0;background:#abc3d3}#kakaoApp .kk-chat.open{display:block}#kakaoApp .kk-chathead{position:absolute;top:42px;left:0;right:0;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;z-index:2;background:#abc3d3ec;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}#kakaoApp .kk-back{height:45px;min-width:66px;border-radius:24px!important;background:#ffffff3c!important;border:1px solid #ffffff99!important;display:flex;align-items:center;gap:7px;justify-content:center;font-size:18px!important}#kakaoApp .kk-back svg{height:24px;width:20px;fill:none;stroke:#151515;stroke-width:3}#kakaoApp .kk-chatname{font-size:18px;font-weight:730;letter-spacing:-.4px;max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#kakaoApp .kk-chattools{display:flex;gap:7px;background:#ffffff3b;border:1px solid #ffffff80;border-radius:27px;padding:9px 11px}#kakaoApp .kk-chattools button{width:24px;height:23px;padding:0}#kakaoApp .kk-chattools svg{width:23px;height:23px;fill:none;stroke:#181818;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+#kakaoApp .kk-chat-scroll{position:absolute;top:111px;bottom:78px;left:0;right:0;overflow:auto;padding:8px 11px 18px;overscroll-behavior:contain;scrollbar-width:thin}#kakaoApp .kk-day{margin:18px auto 15px;background:#91b0c3a3;border-radius:18px;padding:6px 12px;width:max-content;max-width:95%;font-size:12px;color:#24323b;text-align:center}#kakaoApp .kk-msg{display:flex;gap:7px;margin:6px 0;align-items:flex-start}#kakaoApp .kk-msg.out{justify-content:flex-end}#kakaoApp .kk-msg.in{justify-content:flex-start}#kakaoApp .kk-miniavatar{height:35px;width:35px;border-radius:13px;background:#96cdf7;display:grid;place-items:center;flex:none}#kakaoApp .kk-miniavatar svg{height:28px;width:28px}#kakaoApp .kk-msg-body{max-width:75%;min-width:0}#kakaoApp .kk-sender{font-size:12px;color:#354650;margin-bottom:5px}#kakaoApp .kk-bubbleline{display:flex;align-items:flex-end;gap:5px}#kakaoApp .kk-msg.out .kk-bubbleline{flex-direction:row-reverse}#kakaoApp .kk-bubble{font-size:15px;line-height:1.36;letter-spacing:-.3px;white-space:pre-wrap;overflow-wrap:break-word;word-break:keep-all;border-radius:14px;padding:9px 11px;box-shadow:0 1px 1px #00000006}#kakaoApp .kk-msg.in .kk-bubble{background:#fff;border-top-left-radius:3px}#kakaoApp .kk-msg.out .kk-bubble{background:#fee500;border-top-right-radius:3px}#kakaoApp .kk-time{font-size:10px;color:#536775;white-space:nowrap;flex:none}#kakaoApp .kk-callcard{background:#fff;border-radius:13px;padding:12px 14px;min-width:178px;max-width:210px;display:flex;flex-direction:column;gap:5px}#kakaoApp .kk-callcard strong{font-size:14px;font-weight:650}#kakaoApp .kk-callcard span{font-size:12px;color:#7b7b7b}#kakaoApp .kk-callcard svg{width:27px;height:27px;stroke:#1b1b1b;fill:none;stroke-width:2}
+#kakaoApp .kk-compose{position:absolute;bottom:13px;left:12px;right:12px;height:49px;display:flex;align-items:center;gap:10px;padding:0 10px;background:#ffffff77;border:1px solid #ffffffaa;border-radius:30px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}#kakaoApp .kk-compose .kk-plus{background:#fff;border-radius:50%;width:35px;height:35px;font-size:29px;line-height:1;flex:none}#kakaoApp .kk-compose .kk-input{font-size:14px;color:#7b909f;flex:1;min-width:0}#kakaoApp .kk-compose .kk-face{font-size:20px;color:#536c7c}#kakaoApp .kk-compose .kk-hash{background:#fff;border-radius:50%;width:34px;height:34px;font-size:23px}
+#kakaoApp .kk-facetalk{position:absolute;inset:0;z-index:5;display:none;background:linear-gradient(150deg,#9bb7c9,#546e84 70%,#334a60);color:white;text-align:center}#kakaoApp .kk-facetalk.active{display:flex;flex-direction:column;align-items:center}#kakaoApp .kk-facetalk .kk-facename{font-size:28px;font-weight:650;margin-top:25vh}#kakaoApp .kk-facetalk .kk-facestatus{font-size:16px;color:#e7e7e7;margin-top:8px}#kakaoApp .kk-facetalk .kk-facelogo{width:80px;height:80px;border-radius:26px;background:#9ed1fa;display:grid;place-items:center;margin-top:23px}#kakaoApp .kk-facetalk .kk-facelogo svg{width:56px;height:56px}#kakaoApp .kk-facetalk .kk-hangup{position:absolute;bottom:100px;border-radius:50%;background:#f44345;color:white;width:67px;height:67px;font-size:29px}
+</style>
+<style id="v15-kakao-interactions">
+#kakaoApp .kk-compose .kk-input{border:0;outline:0;background:transparent;flex:1;min-width:0;font-size:14px;color:#222;font-family:inherit;padding:0 2px}
+#kakaoApp .kk-compose .kk-input::placeholder{color:#7b909f}
+#kakaoApp .kk-compose .kk-send{display:none;flex:none;width:31px;height:31px;border-radius:50%;background:#fee500;color:#222;font-size:23px;line-height:28px;font-weight:650}
+#kakaoApp .kk-compose.has-text .kk-send{display:block}
+#kakaoApp .kk-compose.has-text .kk-face,#kakaoApp .kk-compose.has-text .kk-hash{display:none}
+#kakaoApp .kk-typing{position:absolute;bottom:75px;left:54px;display:none;align-items:center;gap:5px;border-radius:13px 13px 13px 3px;background:#fff;padding:12px 15px;z-index:3;box-shadow:0 2px 7px #0001}
+#kakaoApp .kk-typing.visible{display:flex}
+#kakaoApp .kk-typing span{height:7px;width:7px;background:#9ba8b1;border-radius:50%;animation:kkPulse 1.1s ease-in-out infinite}
+#kakaoApp .kk-typing span:nth-child(2){animation-delay:.17s}#kakaoApp .kk-typing span:nth-child(3){animation-delay:.34s}
+@keyframes kkPulse{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+#kakaoApp .kk-unread{font-size:10px;color:#d3a400;align-self:flex-end;flex:none;margin-bottom:13px;font-weight:650}
+.phone:has(.kk-incoming.visible) .status{z-index:21;color:#fff!important}.phone:has(.kk-incoming.visible) .island{z-index:21}.phone:has(.kk-incoming.visible) .homebar{z-index:21!important;background:#fff!important}.kk-incoming{position:absolute;inset:0;z-index:18;display:none;overflow:hidden;color:white;background:radial-gradient(ellipse at 50% 84%,#435544 0%,transparent 72%),linear-gradient(160deg,#444a38,#2f3b34 70%,#38483e);font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;text-align:center}
+.kk-incoming.visible{display:block}
+.kk-in-status{margin-top:clamp(135px,24%,195px);font-size:18px;color:#ffffffa8;font-weight:450;transition:opacity .25s}
+.kk-in-name{font-size:35px;font-weight:560;margin-top:8px;letter-spacing:-1px}
+.kk-in-bottom{position:absolute;bottom:88px;left:30px;right:30px}
+.kk-in-actions{display:flex;justify-content:space-between;padding:0 25px 29px;font-size:12px}
+.kk-in-actions>div{display:flex;flex-direction:column;gap:8px;align-items:center}
+.kk-in-actions span{font-size:22px}
+.kk-swipe{height:66px;border-radius:40px;background:#ffffff38;position:relative;display:flex;align-items:center;justify-content:center;color:#ffffffb5;font-size:16px;touch-action:none;user-select:none;overflow:hidden}
+.kk-swipe-thumb{position:absolute;left:4px;top:4px;width:58px;height:58px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 6px #0003;z-index:2;transition:transform .16s}
+.kk-swipe-thumb svg{height:30px;width:30px}
+.kk-swipe span{padding-left:42px}
+.kk-in-active .kk-in-status{margin-top:clamp(135px,24%,195px)}
+.kk-in-subtitle{position:absolute;top:36%;left:7%;right:7%;font-size:19px;line-height:1.5;font-weight:430;min-height:95px;display:flex;align-items:center;justify-content:center;text-wrap:balance;word-break:keep-all}
+.kk-in-subtitle span{display:block;opacity:0;transform:translateY(9px);transition:opacity .42s ease,transform .42s ease}
+.kk-in-subtitle span.visible{opacity:1;transform:translateY(0)}
+.kk-in-callcontrols{position:absolute;bottom:100px;left:0;right:0;display:flex;align-items:center;flex-direction:column;gap:9px;font-size:13px}
+.kk-in-callcontrols button{width:72px;height:72px;border-radius:50%;border:1px solid #ffffff66;background:#f10c17;display:grid;place-items:center}
+.kk-in-callcontrols svg{width:37px;height:37px}
+.kk-in-instruction{position:absolute;bottom:47px;left:0;right:0;font-size:11px;color:#ffffff85}
+.kk-incoming .kk-in-status,.kk-incoming .kk-in-name{pointer-events:none}
+@media(max-height:680px){.kk-in-bottom{bottom:60px}.kk-in-callcontrols{bottom:75px}}
+</style>
+
+<style id="v16-phone-polish">
+/* The contact is named differently in KakaoTalk and the system Phone app. */
+.kk-incoming .kk-in-status{margin-top:clamp(120px,21%,185px);font-size:clamp(16px,3.5vw,19px);color:#ffffffa6}
+.kk-incoming .kk-in-name{font-size:clamp(31px,7.2vw,39px);font-weight:550;letter-spacing:-.9px}
+.kk-incoming .kk-swipe-thumb svg{width:33px;height:33px;display:block;flex-shrink:0;overflow:visible}
+.kk-incoming .kk-swipe-thumb{display:flex;align-items:center;justify-content:center}
+.kk-in-active .kk-in-subtitle{top:32%;font-size:clamp(17px,4.1vw,20px);font-weight:430;line-height:1.55;left:9%;right:9%;min-height:110px}
+.kk-in-active .kk-in-callcontrols{bottom:clamp(68px,9%,100px);left:7%;right:7%;display:block}
+.kk-in-active .kk-in-control-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,4vh,35px) 8px;justify-items:center}
+.kk-in-active .kk-in-control{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:clamp(12px,3.1vw,14px);color:#fff;white-space:nowrap}
+.kk-in-active .kk-in-control .kk-in-round{height:clamp(62px,16vw,76px);width:clamp(62px,16vw,76px);border-radius:50%;background:#ffffff25;border:1px solid #ffffff60;color:#fff;display:grid;place-items:center;box-shadow:inset 0 1px 3px #ffffff27;cursor:pointer;padding:0}
+.kk-in-active .kk-in-control .kk-in-round svg{height:32px;width:32px;display:block}
+.kk-in-active .kk-in-control .kk-in-round.kk-disabled{color:#ffffff60;opacity:.62}
+.kk-in-active .kk-in-control .kk-in-round.kk-in-end{background:#f00d16;border-color:#ff7777;box-shadow:inset 0 1px 2px #ffffff50}
+.kk-in-active .kk-in-control .kk-in-round.kk-in-end svg{width:36px;height:36px}
+.kk-in-active .kk-in-instruction{bottom:33px;font-size:10px}
+@media(max-height:690px){.kk-in-active .kk-in-callcontrols{bottom:50px}.kk-in-active .kk-in-control-grid{gap:14px 6px}.kk-in-active .kk-in-instruction{bottom:18px}}
+</style>
+
+<style id="v17-final">
+.wall{background:#f6f1ed url('strawberry-wallpaper.jpeg') center center/cover no-repeat!important;filter:none!important}
+.wall:after{background:linear-gradient(180deg,#00000020,transparent 40%,#00000018)!important}
+#lock .lockicon{font-size:28px}
+#home .widget{background:#ffffff9c;border-color:#ffffffbb;color:#292327;text-shadow:none}
+#home .widget small.widget-event{display:block;color:#a12c4c;font-size:11px;font-weight:650;line-height:1.25;margin-top:3px;white-space:normal}
+#home .widget strong{font-size:26px;margin-top:2px}
+#home .apps{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:20px}
+#home .app{color:#282124;text-shadow:0 1px 3px #ffffffb0}
+#home .lockbtn{background:#ffffffa8;color:#392c2c;border-color:#fff}
+#kakaoApp .kk-chat-scroll{padding-bottom:20px}
+#kakaoApp .kk-typing{position:relative!important;left:auto!important;bottom:auto!important;display:none;align-items:center;width:max-content;min-height:39px;margin:9px 0 12px 43px;z-index:auto;flex-shrink:0}
+#kakaoApp .kk-typing.visible{display:flex!important}
+</style>
+<style id="patch-v1">
+.wall{background:#7ebef0 url('patch-wallpaper.jpg') center center/cover no-repeat!important;filter:none!important}
+.wall:after{background:linear-gradient(180deg,#00000024,transparent 35%,#0000001f)!important}
+#home .widget{background:#ffffff8c;color:#1b2845;border-color:#ffffffb0}
+#home .app{color:#fff;text-shadow:0 1px 4px #183b76}
+#home .widget-event{color:#235e9d!important}
+#pass{display:none!important}
+.wall.patch-hacked{background:#000!important}
+#messagesApp .m-row:not([data-thread]){cursor:default}
+#messagesApp .m-row:not([data-thread]) .m-arrow{display:none}
+.patch-notifications{position:absolute;top:118px;left:16px;right:16px;z-index:5;pointer-events:none}
+.patch-notice{background:#f1f5f8df;backdrop-filter:blur(18px);color:#17233b;border-radius:17px;padding:12px;margin-bottom:8px;font-size:12px;box-shadow:0 4px 15px #0002;pointer-events:auto}
+.patch-notice b{display:block;margin-bottom:5px}
+#patchCrash{position:absolute;inset:0;background:#000;color:#14e56c;z-index:100;display:none;overflow:hidden;padding:60px 14px 20px;font:12px/1.6 monospace}
+#patchCrash.visible{display:block}
+#patchCrash pre{white-space:pre-wrap;word-break:break-all;margin:0}
+#patchCrash .red{color:#ff3149;font-weight:900;font-size:23px;text-align:center;animation:patchBlink .2s steps(2) infinite}
+@keyframes patchBlink{50%{opacity:.2}}
+#patchOverride{position:absolute;inset:0;z-index:50;background:#07090e;color:#c5f8d5;display:none;padding:95px 24px 30px;font-family:monospace}
+#patchOverride.visible{display:block}
+#patchOverride button{color:#a2ffbc;background:none;border:1px solid #3b7152;padding:9px 15px;border-radius:8px}
+#patchOverride .patch-lines{margin-top:35px;white-space:pre-wrap;font-size:13px;line-height:1.9}
+</style>
+<style id="patch-v2-fixes">
+/* Evenly sized widgets: no accidental horizontal protrusion */
+#home .widgets{width:100%;min-width:0;align-items:stretch;gap:10px}
+#home .widget{min-width:0;max-width:calc(50% - 5px);overflow:hidden;padding:12px 11px;height:112px}
+#home .reminder-widget{display:flex;flex-direction:column;gap:7px}
+#home .reminder-title{font-size:12px;font-weight:750;white-space:nowrap;display:flex;align-items:center;gap:5px}
+#home .reminder-dot{display:inline-grid;place-items:center;border-radius:50%;background:#197bdb;color:#fff;font-size:9px;width:15px;height:15px;flex:none}
+#home .reminder-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;font-size:10px;line-height:1.25}
+#home .reminder-list li{display:flex;align-items:flex-start;gap:5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#home .reminder-list li:before{content:'◯';font-size:10px;color:#2b79ca;flex:none}
+#phoneApp .pnavmain{justify-content:space-around}
+#phoneApp .pnavmain button{min-width:0}
+/* Conversation fills the app viewport, with safe header/footer spacing */
+#messagesApp .m-conversation{inset:0!important;width:100%;height:100%;overflow:hidden}
+#messagesApp .m-thread-header{top:0!important;height:150px!important;padding-top:53px!important;box-sizing:border-box}
+#messagesApp .m-back{top:56px!important}
+#messagesApp .m-thread-avatar{width:51px;height:51px}
+#messagesApp .m-thread-avatar svg{width:43px;height:43px}
+#messagesApp .m-thread-name{font-size:14px;padding:3px 12px;margin-top:3px}
+#messagesApp .m-thread-scroll{top:150px!important;bottom:83px!important;left:0!important;right:0!important;padding:9px 13px 13px!important}
+#messagesApp .m-bubble{font-size:13px!important;line-height:1.38!important;padding:7px 10px!important;border-radius:15px!important;max-width:79%!important}
+#messagesApp .m-bubble-row{margin:3px 0!important}
+#messagesApp .m-bubble-row.out .m-bubble{border-bottom-right-radius:5px!important}
+#messagesApp .m-bubble-row.in .m-bubble{border-bottom-left-radius:5px!important}
+#messagesApp .m-day{font-size:11px;margin:13px 0 10px}
+#messagesApp .m-thread-bottom{bottom:25px!important;left:12px!important;right:12px!important;height:45px!important;gap:8px}
+#messagesApp .m-plus{display:grid!important;place-items:center!important;padding:0!important;width:37px!important;height:37px!important;font-size:26px!important;line-height:1!important}
+#messagesApp .m-composebox{height:41px!important;font-size:12px!important;padding:0 12px!important}
+#messagesApp .m-composebox svg{width:18px;height:18px}
+@media(max-height:690px){
+ #messagesApp .m-thread-header{height:132px!important;padding-top:45px!important}
+ #messagesApp .m-back{top:48px!important}
+ #messagesApp .m-thread-scroll{top:132px!important}
+}
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="wall"></div><div class="island"></div>
+<div class="status" aria-label="상태 표시줄"><div class="status-left"><span class="carrier">GOV</span><svg width="17" height="18" viewBox="0 0 24 24" aria-label="무음" role="img"><path d="M17 9V7a5 5 0 0 0-8.5-3.5M6.6 7.5C6.2 8.6 6 9.8 6 11v3l-2 3h14M10 21h4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 3l18 18" stroke="white" stroke-width="2.4" stroke-linecap="round"/></svg></div><div class="status-right"><svg width="20" height="17" viewBox="0 0 20 17" aria-label="셀룰러 신호" role="img"><rect x="0" y="11" width="3.5" height="6" rx="1.5" fill="white"/><rect x="5.5" y="8" width="3.5" height="9" rx="1.5" fill="white"/><rect x="11" y="4" width="3.5" height="13" rx="1.5" fill="white"/><rect x="16.5" y="0" width="3.5" height="17" rx="1.5" fill="white"/></svg><svg width="32" height="17" viewBox="0 0 36 19" aria-label="배터리 80%" role="img"><rect x="1" y="1" width="30" height="17" rx="5" fill="none" stroke="white" stroke-opacity=".85" stroke-width="1.5"/><rect x="3.2" y="3.1" width="23.5" height="12.8" rx="3.1" fill="white"/><path d="M33 6.2c2 1 2 5.5 0 6.5" fill="none" stroke="white" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/><text x="15" y="13.6" text-anchor="middle" font-size="10.5" font-family="-apple-system,Arial" font-weight="800" fill="#555">80</text></svg></div></div>
+<section id="lock" class="view" aria-label="잠금 화면"><div class="lockicon">🔓</div><div class="date" id="lockDate"></div><div class="clock" id="lockTime">9:41</div><div class="hint">화면을 탭하거나 위로 스와이프하세요</div><div class="lockbottom"><button class="circle" type="button" id="flashlightButton" aria-label="손전등 켜기" title="손전등"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 3h12v5H10zM10.5 10h11l-2.5 6v11.5a2.5 2.5 0 0 1-2.5 2.5h-1a2.5 2.5 0 0 1-2.5-2.5V16z" fill="currentColor"/><circle cx="16" cy="23.5" r="1.6" fill="#777"/></svg></button><button class="circle" type="button" id="cameraButton" aria-label="카메라 열기" title="카메라"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7l2.2-3h7.6L22 7h4a3.5 3.5 0 0 1 3.5 3.5v15A3.5 3.5 0 0 1 26 29H6a3.5 3.5 0 0 1-3.5-3.5v-15A3.5 3.5 0 0 1 6 7z" fill="currentColor"/><circle cx="16" cy="17.5" r="7.1" fill="#747880"/><circle cx="16" cy="17.5" r="4.8" fill="currentColor"/><circle cx="25.5" cy="11.2" r="1.2" fill="#747880"/></svg></button></div></section>
+<section id="pass" class="view hidden" aria-label="비밀번호 입력"><div class="passTitle">암호 입력</div><div class="dots" id="dots"></div><div class="error" id="error"></div><div class="keypad" id="keypad"></div></section>
+<section id="home" class="view hidden" aria-label="홈 화면"><button class="lockbtn" id="lockButton">🔒 잠그기</button><div class="widgets"><div class="widget"><small id="widgetDate">금요일</small><strong id="widgetDay">23</strong><small class="widget-event">현장 순찰 · 점검</small></div><div class="widget reminder-widget"><div class="reminder-title"><span class="reminder-dot">✓</span> 미리 알림</div><ul class="reminder-list"><li>현장 점검표 확인</li><li>아이템 배치표 검수</li><li>교대조 일정 전달</li></ul></div></div><div class="apps" id="apps"></div><div class="dock" id="dock"></div></section>
+
+<section id="messagesApp" aria-label="메시지 앱">
+  <div class="m-head"><button class="m-glass" type="button" aria-label="편집">편집</button><button class="m-glass m-filter" type="button" aria-label="필터"><svg width="25" height="25" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h18M8 13h10M11 19h4"/></svg></button></div>
+  <h1 class="m-title">메시지</h1>
+  <div class="m-list" id="messageList"></div>
+  <div class="m-bottom"><div class="m-searchbar"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 6 6"/></svg><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 12a7 7 0 0 0 14 0M12 19v3"/></svg></div><button class="m-compose" type="button" aria-label="새 메시지"><svg viewBox="0 0 24 24"><path d="M12 5H5a3 3 0 0 0-3 3v11a3 3 0 0 0 3 3h11a3 3 0 0 0 3-3v-7"/><path d="m10 14 11-11m-6 0h6v6"/></svg></button></div>
+
+<div class="m-conversation" id="messageConversation" aria-label="문자 대화">
+  <div class="m-thread-header">
+    <button class="m-back" id="messageBack" type="button" aria-label="메시지 목록으로 돌아가기"><svg viewBox="0 0 24 24"><path d="M16 3 7 12l9 9"/></svg><small>2</small></button>
+    <div class="m-thread-avatar" id="messageAvatar"></div>
+    <div class="m-thread-name" id="messageThreadName"></div>
+  </div>
+  <div class="m-thread-scroll" id="messageChatScroll"></div>
+  <div class="m-thread-bottom">
+    <button class="m-plus" type="button" aria-label="첨부">+</button>
+    <div class="m-composebox"><span>문자 메시지 · SMS</span><svg viewBox="0 0 24 24"><rect x="10" y="5" width="4" height="14" rx="2"/><path d="M6 9v6m12-8v10M2 11v2m20-2v2"/></svg></div>
+  </div>
+</div>
+</section>
+<section id="photosApp" aria-label="사진 보관함">
+ <div class="ph-scroll" id="photoScroll"><div class="ph-hero"><div><h1>보관함</h1><div class="ph-count" id="photoCount">사진 불러오는 중…</div></div><div class="ph-actions"><button class="ph-round ph-filter" type="button" aria-label="필터"><svg viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button><button class="ph-round" type="button">선택</button></div></div><div class="ph-grid" id="photoGrid"></div><div class="ph-empty" id="photoEmpty" hidden>아직 저장된 사진이 없어.<br>GitHub의 <strong>photos</strong> 폴더에 사진을 올려줘!</div></div>
+ <div class="ph-nav"><div class="ph-tabs"><button type="button" class="ph-tab selected"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="3"/><circle cx="8" cy="9" r="2"/><path d="m4 18 6-6 4 4 3-3 4 4"/></svg>보관함</button><button type="button" class="ph-tab"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M7 4h10M9 2h6"/></svg>모음</button></div><button type="button" class="ph-search" aria-label="검색"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15.5 15.5 6 6"/></svg></button></div>
+</section>
+<section id="kakaoApp" aria-label="카카오톡">
+<div class="kk-inbox"><div class="kk-titlebar"><div class="kk-title">채팅</div><div class="kk-icons"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 1-8 8c-1 0-2-.2-3-.6L4 20l1.6-4A8 8 0 1 1 20 11Z"/><path d="M19 2v6m-3-3h6"/></svg><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg></div></div>
+<div class="kk-chips"><span class="kk-chip active">전체</span><span class="kk-chip">안읽음</span><span class="kk-chip">친구</span><span class="kk-chip">통화</span></div>
+<div class="kk-inbox-list"><button type="button" class="kk-row" id="kkOpenChat"><span class="kk-profile" id="kkListAvatar"></span><span class="kk-row-main"><span class="kk-row-top"><span class="kk-row-name">치트</span><span class="kk-pin">📌</span></span><span class="kk-preview">넵</span></span><span class="kk-row-time">어제</span></button></div>
+<div class="kk-tabbar"><button aria-label="친구"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M3 22c0-9 18-9 18 0Z"/></svg></button><button class="selected" aria-label="채팅"><svg viewBox="0 0 24 24"><path d="M12 3C6 3 2 7 2 12c0 3 2 6 5 7l-1 3 4-2c6 1 12-3 12-8S18 3 12 3Z"/></svg></button><button aria-label="통화"><svg viewBox="0 0 24 24"><path d="M3 4c0 10 7 17 17 17l3-5-6-4-3 3-5-5 3-3-4-6Z"/></svg></button><button aria-label="더보기"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button></div></div>
+<div class="kk-chat" id="kkChat"><div class="kk-chathead"><button type="button" class="kk-back" id="kkBack"><svg viewBox="0 0 24 24"><path d="m16 3-9 9 9 9"/></svg><span>1</span></button><span class="kk-chatname">치트</span><div class="kk-chattools"><button aria-label="검색"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></button><button aria-label="페이스톡" id="kkCall"><svg viewBox="0 0 24 24"><path d="M5 3c1 8 7 14 15 16l2-4-5-3-2 2-5-5 2-2-3-5Z"/></svg></button><button aria-label="메뉴"><svg viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></svg></button></div></div><div class="kk-chat-scroll" id="kkChatScroll"></div><div class="kk-typing" id="kkTyping" aria-label="치트 입력 중"><span></span><span></span><span></span></div><div class="kk-compose"><button type="button" class="kk-plus" aria-label="첨부">+</button><input class="kk-input" id="kkTextInput" type="text" placeholder="메시지 입력" aria-label="카카오톡 메시지 입력" autocomplete="off" maxlength="240"><button class="kk-send" id="kkSend" type="button" aria-label="메시지 전송">↑</button><span class="kk-face">☻</span><button type="button" class="kk-hash">#</button></div></div>
+<div class="kk-facetalk" id="kkFaceTalk"><div class="kk-facename">치트</div><div class="kk-facestatus" id="kkFaceStatus">페이스톡 연결 중…</div><div class="kk-facelogo" id="kkFaceAvatar"></div><button type="button" class="kk-hangup" id="kkHangup" aria-label="통화 종료">☎</button></div>
+</section>
+<div id="kkIncoming" class="kk-incoming" aria-label="치트에게 걸려온 전화" role="dialog" aria-modal="true">
+  <div class="kk-in-status">휴대전화</div><div class="kk-in-name">치트</div>
+  <div class="kk-in-bottom">
+    <div class="kk-in-actions"><div><span>◷</span>나중에 보기</div><div><span>●</span>메시지</div></div>
+    <div class="kk-swipe" id="kkSwipe"><div class="kk-swipe-thumb" id="kkSwipeThumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.5c-.8-.6-2-.5-2.7.3L2.4 4.5c-1.1 1.2-1.3 2.8-.8 4.5 1.3 4.2 6.4 9.3 10.6 10.6 1.7.5 3.3.3 4.5-.8l1.7-1.5c.8-.7.9-1.9.3-2.7l-2.9-3.5c-.6-.7-1.6-.9-2.4-.4l-2 1.3a15 15 0 0 1-6.3-6.3l1.3-2c.5-.8.3-1.8-.4-2.4Z" fill="#29c95e"/></svg></div><span>밀어서 통화하기 ›</span></div>
+  </div>
+</div>
+<div id="kkIncomingActive" class="kk-incoming kk-in-active" aria-label="치트와 통화 중" role="dialog" aria-modal="true">
+  <div class="kk-in-status" id="kkIncomingTimer">00:00</div><div class="kk-in-name">치트</div>
+  <div class="kk-in-subtitle" id="kkIncomingSubtitle" aria-live="polite"></div>
+  <div class="kk-in-callcontrols">
+ <div class="kk-in-control-grid">
+  <div class="kk-in-control"><button type="button" class="kk-in-round" aria-label="스피커"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9H3Zm12-1a6 6 0 0 1 0 8m2-11a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span>스피커</span></div>
+  <div class="kk-in-control"><button type="button" class="kk-in-round kk-disabled" aria-label="FaceTime 비활성화"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 10 5-3v10l-5-3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><span>FaceTime</span></div>
+  <div class="kk-in-control"><button type="button" class="kk-in-round" aria-label="소리 끔"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><span>소리 끔</span></div>
+  <div class="kk-in-control"><button type="button" class="kk-in-round" aria-label="더 보기"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/></svg></button><span>더 보기</span></div>
+  <div class="kk-in-control"><button type="button" class="kk-in-round kk-in-end" id="kkIncomingHangup" aria-label="통화 종료"><svg viewBox="0 0 32 32"><path d="M4 14q12-9 24 0l-2 6-6-2v-4q-4-2-8 0v4l-6 2Z" fill="white"/></svg></button><span>종료</span></div>
+  <div class="kk-in-control"><button type="button" class="kk-in-round" aria-label="키패드"><svg viewBox="0 0 24 24"><g fill="currentColor"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></g></svg></button><span>키패드</span></div>
+ </div>
+</div>
+  <div class="kk-in-instruction">화면을 터치하면 다음 대사가 나옵니다</div>
+</div>
+<section id="phoneApp"  aria-label="전화 앱"><div class="phead"><button class="pglass" id="pLeft">편집</button><div class="ptitle" id="pTitle">통화</div><button class="pglass" id="pRight">☷</button></div><div class="pbody" id="pBody"></div><div class="pnav" id="pNav"><div class="pnavmain"><button data-tab="recent"><span class="navico">◷</span>통화</button><button data-tab="contacts"><span class="navico">◉</span>연락처</button></div><button class="psearch" data-tab="search">⌕</button></div></section><div class="homebar" id="homebar"></div>
+<div id="patchCrash" aria-hidden="true"><pre id="patchCrashText"></pre><div class="red">ERROR ERROR ERROR</div></div>
+<div id="patchOverride"><button id="patchOverrideBack">‹ 홈</button><h2>OVERRIDE_</h2><div class="patch-lines" id="patchOverrideLines">[SYSTEM]\nACCESS GRANTED\n\n메시지가 없습니다.</div></div>
+</div>
+<script>
+const patchStateKey='patch_iphone_v1_override';
+function patchCrashEvent(){
+ if(localStorage.getItem(patchStateKey)==='1')return;
+ const layer=document.getElementById('patchCrash'), log=document.getElementById('patchCrashText');
+ layer.classList.add('visible');
+ let count=0;
+ const timer=setInterval(()=>{
+  log.textContent+=Array.from({length:4},()=>Array.from({length:36},()=>Math.random()>.5?'1':'0').join('')).join('\\n')+'\\n> SYSTEM INTEGRITY ERROR\\n';
+  log.textContent=log.textContent.slice(-1700);
+  count++;
+  if(count>22){
+   clearInterval(timer);layer.classList.remove('visible');
+   localStorage.setItem(patchStateKey,'1');
+   document.querySelector('.wall').classList.add('patch-hacked');
+   const b=makeApp('OVERRIDE');b.querySelector('.appicon').innerHTML='⚠';b.querySelector('.appicon').style.background='#171717';
+   b.onclick=()=>document.getElementById('patchOverride').classList.add('visible');
+   document.getElementById('apps').appendChild(b);
+   show('home');
+  }
+ },90);
+}
+document.getElementById('patchOverrideBack').onclick=()=>document.getElementById('patchOverride').classList.remove('visible');
+const PIN='0831';let entered='',current='lock',toastTimer;
+const $=id=>document.getElementById(id);
+function show(id){['lock','pass','home'].forEach(x=>$(x).classList.toggle('hidden',x!==id));current=id;if(id==='pass'){entered='';$('error').textContent='';updateDots()}}
+function updateDots(){$('dots').innerHTML=Array.from({length:4},(_,i)=>`<span class="dot ${i<entered.length?'on':''}"></span>`).join('')}
+function digit(n){if(entered.length>=4)return;entered+=n;updateDots();if(entered.length===4){setTimeout(()=>{if(entered===PIN){show('home')}else{$('error').textContent='암호가 올바르지 않습니다 · 힌트: 🍓';entered='';updateDots()}},200)}}
+function del(){entered=entered.slice(0,-1);updateDots()}
+const keys=['1','2','3','4','5','6','7','8','9','','0','⌫'];$('keypad').innerHTML=keys.map(k=>`<button class="key ${k==='⌫'?'small':''} ${!k?'empty':''}" data-key="${k}" ${!k?'disabled':''}>${k}</button>`).join('');$('keypad').addEventListener('click',e=>{let k=e.target.closest('button')?.dataset.key;if(k==='⌫')del();else if(/^\d$/.test(k))digit(k)});
+function toastMessage(message){/* Disabled: no placeholder or unimplemented-feature messages. */}
+$('flashlightButton').addEventListener('click',e=>{e.stopPropagation()});
+$('cameraButton').addEventListener('click',e=>{e.stopPropagation()});
+$('lock').addEventListener('click',e=>{if(e.target.closest('.lockbottom'))return;show('home')});let touchStart=0;$('lock').addEventListener('touchstart',e=>touchStart=e.touches[0].clientY,{passive:true});$('lock').addEventListener('touchend',e=>{if(touchStart-e.changedTouches[0].clientY>35)show('home')},{passive:true});$('lockButton').onclick=()=>show('lock');$('homebar').onclick=()=>{if(current==='kakao'){if(kkFaceActive)endKakaoFaceTalk();else if(kkChatOpen)closeKakaoChat();else closeKakao();}else if(current==='photos'){closePhotos();}else if(current==='phone'){closePhone();}else if(current==='messages'){if(activeMessageThread!==null)closeMessageThread();else closeMessages();}else if(current==='home')show('lock');else if(current==='lock')show('home');else show('lock')};
+const iconSVG={
+'설정':'<g fill="none" stroke="#6a6e75" stroke-width="7"><circle cx="32" cy="32" r="15"/><circle cx="32" cy="32" r="7" fill="#8b9099" stroke="none"/></g><path fill="#777c85" d="M27 5h10l2 7 6 3 7-3 7 8-4 6 1 7 6 5-4 10-8-1-5 5-1 8H27l-2-8-6-4-8 1-4-10 6-5 1-7-4-6 7-8 7 3 6-3z" fill-rule="evenodd" opacity=".8"/><circle cx="32" cy="32" r="12" fill="#d9dce1"/><circle cx="32" cy="32" r="6" fill="#707780"/>',
+'날씨':'<circle cx="39" cy="22" r="12" fill="#ffd343"/><path d="M16 46h33a11 11 0 0 0-3-21 17 17 0 0 0-31 6A8 8 0 0 0 16 46" fill="#fff"/>',
+'카메라':'<rect x="9" y="18" width="46" height="32" rx="7" fill="#555b63"/><path d="M20 18l4-6h16l4 6" fill="#737982"/><circle cx="32" cy="34" r="12" fill="#202a37" stroke="#aab0b9" stroke-width="3"/><circle cx="32" cy="34" r="7" fill="#4e738f"/><circle cx="49" cy="23" r="2" fill="#e9edf0"/>',
+'캘린더':'<rect x="0" y="0" width="64" height="64" rx="13" fill="white"/><text x="32" y="17" font-size="11" fill="#e34a45" text-anchor="middle" font-weight="700">금요일</text><text x="32" y="52" font-size="36" fill="#222" text-anchor="middle" id="calendarIconDay">23</text>',
+'알람':'<circle cx="32" cy="32" r="23" fill="white" stroke="#202020" stroke-width="2"/><path d="M32 15v18l13 8" stroke="#202020" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="32" cy="32" r="2.5" fill="#222"/>',
+'FaceTime':'<rect x="8" y="17" width="34" height="30" rx="8" fill="white"/><path d="M43 26l13-9v30l-13-9z" fill="white"/>',
+'Safari':'<circle cx="32" cy="32" r="26" fill="#fff"/><circle cx="32" cy="32" r="23" fill="#159de8"/><path d="M40 22l-7 14-10 7 7-15z" fill="#fff"/><path d="M40 22l-7 14-3-8z" fill="#e84d4d"/>',
+'메일':'<rect x="7" y="16" width="50" height="34" rx="5" fill="white"/><path d="M9 20l23 17 23-17" fill="none" stroke="#2c92ed" stroke-width="2"/>',
+'메모':'<rect x="0" y="0" width="64" height="64" rx="13" fill="#fff"/><path d="M0 13h64v12H0z" fill="#f8d94c"/><path d="M12 36h40M12 44h40M12 52h29" stroke="#d3d4d7" stroke-width="2"/>',
+'Instagram':'<defs><linearGradient id="ig" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#ffcf50"/><stop offset=".35" stop-color="#fb3666"/><stop offset=".7" stop-color="#bc39b4"/><stop offset="1" stop-color="#6b54d8"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#ig)"/><rect x="15" y="15" width="34" height="34" rx="10" fill="none" stroke="white" stroke-width="4"/><circle cx="32" cy="32" r="9" fill="none" stroke="white" stroke-width="4"/><circle cx="44" cy="20" r="3" fill="white"/>',
+'전화':'<path d="M19 10c-4-2-10 3-9 10 2 15 20 33 35 35 7 1 12-5 10-9l-11-8-8 6c-8-4-12-8-16-16l6-8z" fill="white"/>',
+'메시지':'<path d="M32 10c-16 0-26 10-26 22 0 8 5 15 13 19l-2 8 12-6c17 2 29-8 29-21S47 10 32 10" fill="white"/>',
+'카카오톡':'<ellipse cx="32" cy="29" rx="25" ry="20" fill="#382719"/><path d="M20 44l-4 12 16-9" fill="#382719"/><text x="32" y="35" font-size="18" font-weight="900" text-anchor="middle" fill="#fee500">TALK</text>',
+'갤러리':'<g transform="translate(32 32)"><ellipse cy="-13" rx="8" ry="17" fill="#ef5556"/><ellipse cy="-13" rx="8" ry="17" fill="#f7aa43" transform="rotate(45)"/><ellipse cy="-13" rx="8" ry="17" fill="#f5d34c" transform="rotate(90)"/><ellipse cy="-13" rx="8" ry="17" fill="#6acb78" transform="rotate(135)"/><ellipse cy="-13" rx="8" ry="17" fill="#54bde8" transform="rotate(180)"/><ellipse cy="-13" rx="8" ry="17" fill="#6377d9" transform="rotate(225)"/><ellipse cy="-13" rx="8" ry="17" fill="#b075cb" transform="rotate(270)"/><ellipse cy="-13" rx="8" ry="17" fill="#e783b5" transform="rotate(315)"/><circle r="5" fill="white"/></g>'};
+const apps=['설정','날씨','카메라','캘린더','FaceTime','Safari','메일','메모'];
+const dock=['전화','메시지','카카오톡','갤러리'];
+const colors={'설정':'#d9dce2','날씨':'linear-gradient(#167cde,#78c9f5)','카메라':'linear-gradient(#eef0f3,#b6bac1)','캘린더':'#fff','알람':'#fff','FaceTime':'#35c85d','Safari':'#fff','메일':'#2189ed','메모':'#fff','Instagram':'#fff','전화':'#35c95d','메시지':'#43ca62','카카오톡':'#fee500','갤러리':'#fff'};
+const customIcons={'전화':'phone.png','메시지':'messages.png','카카오톡':'kakao.png','갤러리':'photos.png','메일':'mail.png','Instagram':'instagram.png','설정':'settings.png','날씨':'weather.png','Safari':'safari.png'};
+function makeApp(name){const b=document.createElement('button');b.className='app';b.setAttribute('aria-label',name);const icon=document.createElement('span');icon.className='appicon';icon.style.background=colors[name];if(customIcons[name]){const img=document.createElement("img");img.src="icons/"+customIcons[name];img.alt="";icon.appendChild(img)}else{icon.innerHTML=`<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">${iconSVG[name]}</svg>`;}const label=document.createElement('span');label.textContent=name;b.append(icon,label);b.onclick=()=>{if(name==='전화'){openPhone();return;}if(name==='메시지'){openMessages();return;}if(name==='카카오톡'){return;}if(name==='갤러리'){openPhotos();return;}return};return b}
+apps.forEach(a=>$('apps').appendChild(makeApp(a)));dock.forEach(a=>$('dock').appendChild(makeApp(a)));
+if(localStorage.getItem(patchStateKey)==='1'){
+ const b=makeApp('OVERRIDE');b.querySelector('.appicon').innerHTML='⚠';b.querySelector('.appicon').style.background='#171717';
+ b.onclick=()=>document.getElementById('patchOverride').classList.add('visible');$('apps').appendChild(b);
+ document.querySelector('.wall').classList.add('patch-hacked');
+}
+function clock(){const d=new Date(),hm=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),date=d.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'});const st=$('statusTime');if(st)st.textContent=hm;$('lockTime').textContent=hm;$('lockDate').textContent=date;$('widgetDay').textContent=d.getDate();$('widgetDate').textContent=d.toLocaleDateString('ko-KR',{weekday:'long'});const cd=document.getElementById('calendarIconDay');if(cd)cd.textContent=d.getDate()}clock();setInterval(clock,15000);updateDots();
+
+// V7 — All calls are simulated. Only 치트 is interactive.
+const SENIOR='치트';
+const contactData=[
+['치트','전담 조수 · 즐겨찾기'],['크레인 인사팀장님','인사팀장'],['헌츠맨 인사차장님','인사차장'],['스매쉬 인사과장님','인사과장'],['마스코트','스포츠게임부서'],['커맨더','시뮬레이션게임부서'],['니트로','레이싱게임부서'],['포인트 앤 클릭','어드벤처게임부서'],['EQ','리듬게임부서'],['뷸렛','슈팅게임부서'],['킬데스','FPS게임부서'],['다이스','RPG게임부서'],['직소','퍼즐게임부서'],['콤보','액션게임부서'],['어그로','액션게임부서'],['모바일게임부서 직원 A','현장 직원'],['모바일게임부서 직원 B','현장 직원'],['모바일게임부서 직원 C','현장 직원'],['모바일게임부서 직원 D','현장 직원'],['모바일게임부서 직원 E','현장 직원'],['모바일게임부서 직원 F','현장 직원']
+];
+const lines=['선배님~','현장 점검은 잘 마치셨습니까?','제가 정리해둔 아이템 배치표는 확인하셨고요?','아, 물론입니다. 선배님 말씀대로 처리했죠.','그런데 선배님.','오늘도 너무 무리하시는 거 아닙니까?','…그냥 걱정돼서요.','하하, 알겠습니다. 보고서 들고 올라가겠습니다.'];
+const svgIcon=(name)=>({
+phone:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.32.56 3.57.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02z"/></svg>',
+message:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C6.48 3 2 6.86 2 11.63c0 2.4 1.14 4.58 3 6.15L4.4 21l3.5-1.9A11.5 11.5 0 0 0 12 20.3c5.52 0 10-3.86 10-8.67C22 6.86 17.52 3 12 3Z"/></svg>',
+video:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm16 4 4-3v12l-4-3z"/></svg>',
+mail:'<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg>',
+back:'<svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="m15 4-8 8 8 8"/></svg>',
+clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M12 5v7H7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+contact:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><circle cx="12" cy="9" r="3.3" fill="white"/><path d="M5.5 19c1-5 12-5 13 0" fill="white"/></svg>',
+keypad:'<svg viewBox="0 0 24 24">'+[4,12,20].flatMap(x=>[4,12,20].map(y=>`<circle cx="${x}" cy="${y}" r="3.2" fill="currentColor"/>`)).join('')+'</svg>',
+search:'<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="m16 16 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>'})[name]||'';
+let phoneTab='recent',dialNumber='',detailName=null,callName=null,searchTerm='';
+let callLog=[
+[SENIOR,'오늘','out',false],[SENIOR,'어제','out',false],[SENIOR,'어제','out',true],
+['크레인 인사팀장님','어제','in',false],[SENIOR,'어제','out',false],[SENIOR,'화요일','out',true],
+['마스코트','화요일','in',true],[SENIOR,'화요일','out',false],[SENIOR,'월요일','in',true],
+[SENIOR,'월요일','out',false],['헌츠맨 인사차장님','월요일','in',false],[SENIOR,'일요일','out',true],
+[SENIOR,'토요일','out',false],['스매쉬 인사과장님','금요일','in',true],[SENIOR,'금요일','out',false]
+];
+const escapeHTML=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let callConnectTimer=null,callTicker=null,callStartedAt=0,callConnected=false,lineIndex=-1,callEnding=false,subtitleTimer=null,finishTimer=null;
+function clearCallTimers(){clearTimeout(callConnectTimer);clearInterval(callTicker);clearTimeout(subtitleTimer);clearTimeout(finishTimer);callConnectTimer=null;callTicker=null;subtitleTimer=null;finishTimer=null;}
+function setPhoneStatus(){const status=document.querySelector('.status');status.classList.toggle('inphone',true);status.style.color=callName?'#fff':'#000';status.querySelector('.status-right')?.style.setProperty('filter',callName?'brightness(0) invert(1)':'brightness(0)');}
+function openPhone(){show('home');current='phone';$('phoneApp').classList.add('active');$('homebar').style.background='#111';$('homebar').style.zIndex='12';document.querySelector('.status').classList.add('inphone');document.querySelector('.island').classList.add('inphone');renderPhone()}
+function closePhone(){clearCallTimers();$('phoneApp').classList.remove('active');$('homebar').style.background='white';$('homebar').style.zIndex='8';const status=document.querySelector('.status');status.classList.remove('inphone');status.style.color='';status.querySelector('.status-right')?.style.removeProperty('filter');document.querySelector('.island').classList.remove('inphone');current='home';callName=null;detailName=null;callConnected=false;}
+function tabPhone(tab){if(callName||tab==='keypad')return;phoneTab=tab;detailName=null;renderPhone()}
+function avatarFor(name){return `<div class="avatar">${escapeHTML(name.slice(0,1))}</div>`}
+function renderPhone(){let body=$('pBody'),head=$('pTitle');$('pNav').style.display=detailName||callName?'none':'flex';$('pLeft').style.visibility=phoneTab==='keypad'&&!detailName&&!callName?'hidden':'visible';$('pRight').style.visibility=phoneTab==='keypad'&&!detailName&&!callName?'hidden':'visible';document.querySelectorAll('#pNav [data-tab]').forEach(b=>b.classList.toggle('sel',b.dataset.tab===phoneTab));setPhoneStatus();
+if(callName){head.textContent='';$('pLeft').style.visibility='hidden';$('pRight').style.visibility='hidden';body.innerHTML=`<div class="pincall" id="activeCall"><div class="calltop"><p class="callstate" id="callState">휴대전화 연결 중…</p><h2>치트</h2></div><div class="subtitle" id="callSubtitle" aria-live="polite"></div><div class="calltools">
+<div class="calltool"><button data-action="mute" aria-label="소리 끔"><span><svg viewBox="0 0 32 32"><path d="M16 5a4 4 0 0 0-4 4v8a4 4 0 0 0 8 0V9a4 4 0 0 0-4-4Z"/><path d="M8 15v2a8 8 0 0 0 16 0v-2M16 25v4m-5 0h10"/><path d="M5 5l22 22"/></svg></span>소리 끔</button></div>
+<div class="calltool"><span style="opacity:.48"><svg viewBox="0 0 32 32"><rect x="4" y="6" width="21" height="20" rx="4"/><path d="m25 12 5-3v14l-5-3"/><path d="M11 14q0-3 4-3t4 3q0 2-4 4v2m0 3v1"/></svg></span>FaceTime</div>
+<div class="calltool"><button data-action="mute" aria-label="음소거"><span><svg viewBox="0 0 32 32"><rect x="12" y="4" width="8" height="16" rx="4"/><path d="M7 15v2a9 9 0 0 0 18 0v-2M16 26v4m-5 0h10M4 4l24 24"/></svg></span>소리 끔</button></div>
+<div class="calltool"><span><svg viewBox="0 0 32 32" fill="white" stroke="none"><circle cx="8" cy="16" r="2.7"/><circle cx="16" cy="16" r="2.7"/><circle cx="24" cy="16" r="2.7"/></svg></span>더 보기</div>
+<div class="calltool"><button data-action="end" aria-label="통화 종료"><span class="endcall"><svg viewBox="0 0 32 32"><path d="M4 14q12-9 24 0l-2 6-6-2v-4q-4-2-8 0v4l-6 2Z" stroke="none"/></svg></span>종료</button></div>
+<div class="calltool"><span><svg viewBox="0 0 32 32" fill="white" stroke="none">${Array.from({length:9},(_,i)=>`<circle cx="${9+(i%3)*7}" cy="${9+Math.floor(i/3)*7}" r="2.5"/>`).join('')}</svg></span>키패드</div>
+</div></div>`;return}
+if(detailName){head.textContent='연락처';$('pLeft').textContent='‹';$('pRight').textContent='편집';body.innerHTML=`<div class="pdetail"><button class="back" data-action="back" aria-label="뒤로">${svgIcon('back')}</button>${avatarFor(SENIOR)}<h2>치트</h2><div class="pactions"><button disabled title="메시지">${svgIcon('message')}</button><button data-action="call" data-name="${SENIOR}" title="전화">${svgIcon('phone')}</button><button disabled title="FaceTime">${svgIcon('video')}</button><button disabled title="메일">${svgIcon('mail')}</button></div><div class="pdetailcard"><b>휴대전화</b><span><button class="callnumber" data-action="call" data-name="${SENIOR}">010-xxxx-0000</button></span></div><div class="pdetailcard"><b>메모</b><span>즐겨찾기</span></div></div>`;return}
+$('pLeft').textContent='편집';$('pRight').textContent=phoneTab==='contacts'?'+':'☷';head.textContent={recent:'통화',contacts:'연락처',keypad:'',search:'검색'}[phoneTab];
+if(phoneTab==='recent'){body.innerHTML=callLog.map(([name,when,direction,unanswered])=>`<div class="prow" ${name!==SENIOR?'data-inert="true"':''}>${avatarFor(name)}<div class="pinfo" ${name===SENIOR?`data-action="call" data-name="${SENIOR}" role="button" tabindex="0"`:''}><div class="pname ${direction==='in'&&unanswered?'pmissed':''}">${escapeHTML(name)}</div><div class="psub"><span class="callarrow">${direction==='out'?'↗':'↙'}</span>${unanswered?(direction==='out'?'응답 없음':'부재중 전화'):'전화번호'}</div></div><div class="ptime">${escapeHTML(when)}</div><button class="pcallbtn" ${name===SENIOR?`data-action="call" data-name="${SENIOR}"`:'disabled'} aria-label="${escapeHTML(name)} 전화">${svgIcon('phone')}</button></div>`).join('');return}
+if(phoneTab==='contacts'||phoneTab==='search'){let contacts=contactData.filter(c=>phoneTab!=='search'||c[0].toLowerCase().includes(searchTerm.toLowerCase()))
+ .sort((a,b)=>a[0]===SENIOR?-1:b[0]===SENIOR?1:a[0].localeCompare(b[0],'ko-KR'));body.innerHTML=(phoneTab==='search'?`<input class="psearchinput" id="pSearchInput" placeholder="연락처 검색" value="${escapeHTML(searchTerm)}"/>`:'')+contacts.map((c,i)=>`${c[0]===SENIOR&&phoneTab==='contacts'?'<div class="psection">★ 즐겨찾기</div>':''}<button class="prow pcontactrow" ${c[0]===SENIOR?`data-action="detail" data-name="${SENIOR}"`:'data-inert="true"'}>${avatarFor(c[0])}<div class="pinfo"><div class="pname">${escapeHTML(c[0])}</div><div class="psub">${escapeHTML(c[1])}</div></div>${c[0]===SENIOR?'<span class="pstar">★</span>':''}</button>`).join('');if(phoneTab==='search'){$('pSearchInput').addEventListener('input',e=>{searchTerm=e.target.value;let cursor=e.target.selectionStart;renderPhone();$('pSearchInput').focus();$('pSearchInput').setSelectionRange(cursor,cursor)})}return}
+const chars=['','ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ','','+',''];const digits=['1','2','3','4','5','6','7','8','9','*','0','#'];body.innerHTML=`<div class="pkeyscreen"><div class="pnumber">${escapeHTML(dialNumber)||'&nbsp;'}</div><div class="pkeys">${digits.map((d,i)=>`<button class="pkey" data-action="digit" data-digit="${d}">${d}<small>${chars[i]||'&nbsp;'}</small></button>`).join('')}</div><div style="position:relative;width:100%;text-align:center"><button class="pcallgreen" data-action="dial" aria-label="전화 걸기">${svgIcon('phone')}</button><button class="pdelete" data-action="delete" aria-label="삭제">⌫</button></div></div>`;
+}
+function startVirtualCall(name){if(name!==SENIOR)return;clearCallTimers();callName=SENIOR;callConnected=false;callEnding=false;lineIndex=-1;callLog.unshift([SENIOR,'방금','out',false]);renderPhone();callConnectTimer=setTimeout(()=>{if(callName!==SENIOR)return;callConnected=true;callStartedAt=Date.now();const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(callName===SENIOR){state.textContent='00:00';state.classList.remove('switching')}},270)}const hint=$('callHint');if(hint)hint.style.display='block';callTicker=setInterval(()=>{if(!callName)return;let secs=Math.floor((Date.now()-callStartedAt)/1000);let label=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');if($('callState'))$('callState').textContent=label},250)},3000)}
+function showCallLine(){if(callEnding||!callConnected)return;if(lineIndex>=lines.length-1){endVirtualCall();return}lineIndex++;clearTimeout(subtitleTimer);const area=$('callSubtitle');if(!area)return;const old=area.querySelector('span');if(old)old.classList.remove('visible');subtitleTimer=setTimeout(()=>{if(!callName||callEnding)return;const line=lines[lineIndex];
+const cinematicBreaks={
+'근무 시간에 이딴 용건으로 전화 걸지 말게.':'근무 시간에 이딴 용건으로\\n전화 걸지 말게.',
+'자네가 오늘 하루 딸기칩 타령 없이 근무를 잘 마무리한다면 말이야.':'자네가 오늘 하루 딸기칩 타령 없이\\n근무를 잘 마무리한다면 말이야.',
+'수호대 매점 딸기칩이 품절됐다고?':'수호대 매점 딸기칩이\\n품절됐다고?'
+};
+const displayed=cinematicBreaks[line]||line;
+area.innerHTML=`<span>${displayed.split('\\n').map(part=>`<span class="lyric-line">${escapeHTML(part)}</span>`).join('')}</span>`;requestAnimationFrame(()=>requestAnimationFrame(()=>area.querySelector('span')?.classList.add('visible')))},old?260:10)}
+function endVirtualCall(){if(callEnding||!callName)return;callEnding=true;clearCallTimers();const area=$('callSubtitle');if(area)area.querySelector('span')?.classList.remove('visible');const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(!callName)return;state.textContent='통화 종료';state.classList.remove('switching')},220)}$('activeCall')?.classList.add('ending');finishTimer=setTimeout(()=>{callName=null;callConnected=false;callEnding=false;detailName=null;phoneTab='recent';renderPhone()},1250)}
+$('pNav').innerHTML=`<div class="pnavmain"><button data-tab="recent"><span class="navico">${svgIcon('clock')}</span>통화</button><button data-tab="contacts"><span class="navico">${svgIcon('contact')}</span>연락처</button></div><button class="psearch" data-tab="search" aria-label="검색">${svgIcon('search')}</button>`;
+$('pNav').addEventListener('click',e=>{let t=e.target.closest('[data-tab]');if(t)tabPhone(t.dataset.tab)});
+$('pBody').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(callName){if(b?.dataset.action==='end'){e.stopPropagation();endVirtualCall();return}if(b?.dataset.action==='mute'){e.stopPropagation();b.closest('.calltool')?.classList.toggle('muted');return}showCallLine();return}if(!b)return;let action=b.dataset.action,name=b.dataset.name;if(action==='detail'){if(name===SENIOR){detailName=name;renderPhone()}}else if(action==='call'){startVirtualCall(name)}else if(action==='back'){detailName=null;renderPhone()}else if(action==='digit'){if(dialNumber.length<22)dialNumber+=b.dataset.digit;renderPhone()}else if(action==='delete'){dialNumber=dialNumber.slice(0,-1);renderPhone()}else if(action==='dial'){/* Other numbers intentionally do nothing. */}});
+$('pBody').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.action==='call'&&e.target.dataset.name===SENIOR)startVirtualCall(SENIOR)});
+$('pLeft').onclick=()=>{if(detailName){detailName=null;renderPhone()}};
+$('pRight').onclick=()=>{};
+
+/* V10: Messages inbox only. Conversation screens will be built separately. */
+const messageThreads=[
+ {name:'치트',preview:'네~ 배치표는 출력해서 선배님 책상에 올려뒀습니다.^^',date:'방금',heart:true,interactive:true},
+ {name:'모바일게임부서 직원 A',preview:'대리님, 3구역 아이템 수량 재확인 부탁드립니다.',date:'오늘'},
+ {name:'모바일게임부서 직원 B',preview:'오전 점검표 결재받았습니다. 감사합니다!',date:'오늘'},
+ {name:'모바일게임부서 직원 C',preview:'현장 입구 쪽 NPC 동선이 꼬였습니다. 확인 부탁드립니다.',date:'어제'},
+ {name:'모바일게임부서 직원 D',preview:'말씀하신 보충 물품 전부 창고에 넣어뒀습니다.',date:'어제'},
+ {name:'모바일게임부서 직원 E',preview:'대리님, 내일 교대조 편성표 전달드리겠습니다.',date:'수요일'},
+ {name:'모바일게임부서 직원 F',preview:'테스트 서버 점검 완료했습니다. 특이사항 없습니다.',date:'수요일'},
+ {name:'크레인 인사팀장님',preview:'인력 지원 요청 건 확인했네. 일정은 다시 공유하지.',date:'화요일'},
+ {name:'헌츠맨 인사차장님',preview:'현장 보고서 잘 받았네. 수고했어.',date:'월요일'},
+ {name:'스매쉬 인사과장님',preview:'이번 주 부서 일정은 기존대로 진행하게.',date:'월요일'},
+ {name:'니트로',preview:'레이싱게임부서 테스트 결과 공유드립니다.',date:'지난주'},
+ {name:'EQ',preview:'리듬게임부서 업데이트 점검 요청입니다.',date:'지난주'}
+];
+function renderMessages(){
+ const list=$('messageList');
+ const personSvg='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="9" fill="#fff"/><path d="M7 42c2-12 32-12 34 0" fill="#fff"/></svg>';
+ list.innerHTML=messageThreads.map((t)=>`<div class="m-row" ${t.interactive?`data-thread="${messageThreads.indexOf(t)}" role="button" tabindex="0"`:""} aria-label="${escapeHTML(t.name)}: ${escapeHTML(t.preview)}"><div class="m-avatar">${t.heart?'C':personSvg}</div><div class="m-content"><div class="m-top"><span class="m-name">${escapeHTML(t.name)}</span><span class="m-date">${escapeHTML(t.date)}</span><span class="m-arrow">›</span></div><div class="m-preview">${escapeHTML(t.preview).replace(/\n/g,'<br>')}</div></div></div>`).join('');
+}
+
+const chatContents=[
+ [
+  ['day','10월 21일 수요일'],
+  ['in','선배님 오늘 오전 아이템 배치 변경사항 확인하셨슴까~?'],
+  ['out','확인했네. 2구역 회복 아이템 수량이 지난주 기준으로 되어 있더군.'],
+  ['in','아 그 부분은 바로 수정해두겠습니다~'],
+  ['out','수정 후에는 반드시 다시 검수하게.'],
+  ['in','넵~^^'],
+  ['day','10월 22일 목요일'],
+  ['out','아이템 배치 편성표 출력해놨나?'],
+  ['in','네~'],
+  ['in','선배님 책상 위에 올려뒀습니다.'],
+  ['out','수고했네. 오후 현장 점검 전에 같이 확인하지.'],
+  ['in','넷슴다~'],
+  ['day','오늘 11:06'],
+  ['in','선배님 외근 복귀하셨습니까~?'],
+  ['out','아직일세. 무슨 일이지.'],
+  ['in','그냥 보고싶어서 말임다'],
+  ['out','곧 들어가니 그때 보지.'],
+  ['in','넵 ㅎㅎ'],
+  ['day','오늘 14:18'],
+  ['out','아이템 배치표 3구역 수정본은 어디 있나?'],
+  ['in','공용 폴더에 올려뒀습니다! 인쇄본도 준비할까요?'],
+  ['out','한 부만 출력하게. 담당 직원들에게도 변경 사항 전달하고.'],
+  ['in','네~ 배치표는 출력해서 선배님 책상에 올려뒀습니다.^^']
+ ]
+];
+let activeMessageThread=null;
+const messagePersonSvg='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="9" fill="#fff"/><path d="M7 42c2-12 32-12 34 0" fill="#fff"/></svg>';
+function showMessageThread(index){
+ if(index!==0)return;
+ activeMessageThread=index;
+ const t=messageThreads[index];
+ $('messageThreadName').textContent=t.name;
+ $('messageAvatar').innerHTML=t.heart?'C':messagePersonSvg;
+ const scroll=$('messageChatScroll');
+ scroll.innerHTML=chatContents[index].map(([kind,txt])=>kind==='day'
+  ? `<div class="m-day">${escapeHTML(txt)}</div>`
+  : `<div class="m-bubble-row ${kind}"><div class="m-bubble ${index===0?'':'web'}">${escapeHTML(txt)}</div></div>`).join('');
+ $('messageConversation').classList.add('open');
+ requestAnimationFrame(()=>{scroll.scrollTop=scroll.scrollHeight});
+}
+function closeMessageThread(){
+ activeMessageThread=null;
+ $('messageConversation').classList.remove('open');
+}
+$('messageBack').onclick=closeMessageThread;
+$('messageList').addEventListener('click',e=>{
+ const row=e.target.closest('[data-thread]');
+ if(row)showMessageThread(Number(row.dataset.thread));
+});
+$('messageList').addEventListener('keydown',e=>{
+ if(e.key==='Enter'){const row=e.target.closest('[data-thread]');if(row)showMessageThread(Number(row.dataset.thread))}
+});
+
+function openMessages(){
+ show('home');current='messages';$('messagesApp').classList.add('active');
+ $('homebar').style.background='#111';$('homebar').style.zIndex='12';
+ const status=document.querySelector('.status');status.classList.add('inphone');status.style.color='#000';
+ status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');
+ document.querySelector('.island').classList.add('inphone');
+ renderMessages();
+}
+function closeMessages(){
+ closeMessageThread();
+ $('messagesApp').classList.remove('active');
+ $('homebar').style.background='white';$('homebar').style.zIndex='8';
+ const status=document.querySelector('.status');status.classList.remove('inphone');status.style.color='';
+ status.querySelector('.status-right')?.style.removeProperty('filter');
+ document.querySelector('.island').classList.remove('inphone');current='home';
+}
+
+
+/* V13 Photos: public GitHub repository folder auto-discovery. */
+const PHOTO_REPO='duckhwayoo/Cheat_iPhone';
+const PHOTO_FOLDER='photos';
+const PHOTO_EXT=/\.(?:png|jpe?g|webp|gif|avif)$/i;
+let photosLoadSerial=0;
+async function loadPhotos(){
+ const serial=++photosLoadSerial;
+ const count=$('photoCount'),grid=$('photoGrid'),empty=$('photoEmpty');
+ count.textContent='사진 불러오는 중…';grid.innerHTML='';empty.hidden=true;
+ try{
+  const api=`https://api.github.com/repos/${PHOTO_REPO}/contents/${PHOTO_FOLDER}?ref=main`;
+  const res=await fetch(api,{cache:'no-store',headers:{'Accept':'application/vnd.github+json'}});
+  if(!res.ok){if(res.status===404)throw new Error('folder');throw new Error('api')}
+  const files=await res.json();
+  if(serial!==photosLoadSerial||current!=='photos')return;
+  const images=Array.isArray(files)?files.filter(f=>f.type==='file'&&PHOTO_EXT.test(f.name)).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true})):[];
+  count.textContent=images.length.toLocaleString('ko-KR')+'개의 항목';
+  if(!images.length){empty.hidden=false;return}
+  const fragment=document.createDocumentFragment();
+  for(const file of images){
+   const cell=document.createElement('div');cell.className='ph-cell';
+   const img=document.createElement('img');img.alt='';img.loading='lazy';img.decoding='async';
+   img.src=`${PHOTO_FOLDER}/${encodeURIComponent(file.name)}`;
+   img.onerror=()=>{cell.style.background='#e9e9ec';img.style.display='none'};
+   cell.appendChild(img);fragment.appendChild(cell);
+  }
+  grid.appendChild(fragment);
+ }catch(err){
+  if(serial!==photosLoadSerial||current!=='photos')return;
+  count.textContent='0개의 항목';
+  empty.hidden=false;
+  empty.innerHTML=err.message==='folder'?'GitHub 저장소에 <strong>photos</strong> 폴더를 만들고<br>사진을 업로드하면 여기에 표시돼!':'사진 목록을 불러오지 못했어.<br>인터넷 연결을 확인하고 다시 열어줘.';
+ }
+}
+function openPhotos(){
+ show('home');current='photos';$('photosApp').classList.add('active');
+ $('homebar').style.background='#111';$('homebar').style.zIndex='12';
+ const status=document.querySelector('.status');status.classList.add('inphone');status.style.color='#000';
+ status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');
+ document.querySelector('.island').classList.add('inphone');
+ $('photoScroll').scrollTop=0;loadPhotos();
+}
+function closePhotos(){
+ ++photosLoadSerial;$('photosApp').classList.remove('active');
+ $('homebar').style.background='white';$('homebar').style.zIndex='8';
+ const status=document.querySelector('.status');status.classList.remove('inphone');status.style.color='';
+ status.querySelector('.status-right')?.style.removeProperty('filter');
+ document.querySelector('.island').classList.remove('inphone');current='home';
+}
+
+/* V14 KakaoTalk: one pinned fictional conversation, with FaceTalk history. */
+const kkAvatarSvg='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="18" r="9" fill="#e5f4ff"/><path d="M8 42c1-14 31-14 32 0" fill="#e5f4ff"/></svg>';
+const kkMessages=[
+['day','2026년 10월 16일 금요일'],
+['out','뿌엥에에ㅠㅠㅠ','10:02'],['out','선배님ㅠㅠㅠ','10:02'],['out','보고싶어요ㅠㅠㅠ','10:03'],['out','선배님안아주새요','10:03'],['out','선배님저만나면안아주셔야해요ㅠㅠㅠ','10:04'],
+['out','선배님 금일 ㅇㅇ보고서 수정 완료했습니다.','11:07'],['in','수고했네.','11:16'],
+['day','2026년 10월 17일 토요일'],
+['out','선배님 집에 샴푸 다 써가시던데요~','18:42'],['out','오늘 퇴근 후에 장 보러 가시죠?','18:42'],['in','그건 또 어떻게 알았나.','18:46'],['in','알겠네.','18:46'],['out','선배님 집에서 씻는 거 한두번도 아닌데 당연히 알지 말입니다~♥','18:48'],
+['day','2026년 10월 18일 일요일'],
+['out','선배님','21:10'],['out','진짜','21:10'],['out','저도 참는데 한개가 있습니다','21:11'],['in','한개가 아니라 한계일세','21:13'],['out','됐어요','21:13'],['out','바보','21:13'],['out','벽창호','21:14'],['out','둔탱이','21:14'],
+['day','2026년 10월 19일 월요일'],
+['out','선배님','15:25'],['out','이에로사이다 없다는데요~?','15:25'],['in','?','15:29'],['in','뭔 말이지','15:29'],['out','모르시면 됐어요…','15:30'],
+['day','2026년 10월 20일 화요일'],
+['out','선배님 뭐하고 계심까~~♥♥','22:06'],['in','씻으려고.','22:08'],['call','페이스톡 해요','22:08'],['reject','거절','22:08'],['call','페이스톡 해요','22:09'],['reject','거절','22:09'],['out','선ㅂ배님','22:09'],['out','저도','22:09'],['out','저도 같이해요','22:09'],['in','닥쳐','22:10'],
+['day','2026년 10월 21일 수요일'],
+['out','선배님 먼작귀 극장판 개봉했다는데 같이 보러가시겠슴까~?♥','23:03'],['in','먼작귀가 뭔가','23:05'],['out','먼가 작고 귀여운 녀석이라는 뜻입니다^^','23:05'],['in','자네는 작지 않네','23:06'],['out','예?','23:06'],['in','귀엽지도 않지','23:07'],['out','예에?ㅠㅠㅠㅠ','23:07'],['in','내일 신작게임 베타테스트 진행하는 날이니까 잠이나 일찍 자게.','23:08'],['out','선배님 바보ㅠㅠㅠ 둔탱이ㅠㅠㅠ 벽창호ㅠㅠㅠ','23:08'],
+['day','2026년 10월 22일 목요일'],
+['in','치트','18:31'],['in','이따가 올 때 그것 좀 사다줄 수 있겠나','18:31'],['out','그거요?','18:33'],['out','제가 쿠팡으로 대량주문해놨지 말입니다~♥','18:33'],['in','그딴 거 말고','18:34'],['in','참기름 사오라고','18:34'],['out','넵','18:34']
+];
+let kkChatOpen=false,kkFaceActive=false,kkFaceTimer=null;
+function renderKakao(){
+ const typingBubble=$('kkTyping');const wasTyping=typingBubble?.classList.contains('visible');
+ $('kkListAvatar').innerHTML=kkAvatarSvg;$('kkFaceAvatar').innerHTML=kkAvatarSvg;
+ $('kkChatScroll').innerHTML=[...kkMessages,...kkExtraMessages].map(([kind,text,time,unread],i)=>{
+  if(kind==='day')return `<div class="kk-day">${escapeHTML(text)} ›</div>`;
+  if(kind==='call'||kind==='reject'){
+   if(kind==='reject')return `<div class="kk-msg in"><div class="kk-miniavatar">${kkAvatarSvg}</div><div class="kk-msg-body"><div class="kk-sender">치트</div><div class="kk-bubbleline"><div class="kk-callcard"><strong>페이스톡을 받지 않았습니다.</strong><span>${escapeHTML(time)}</span></div></div></div></div>`;
+   return `<div class="kk-msg out"><div class="kk-msg-body"><div class="kk-bubbleline"><button type="button" class="kk-callcard" data-facetalk="true" aria-label="페이스톡 연결 화면 보기"><svg viewBox="0 0 30 30"><rect x="3" y="6" width="18" height="17" rx="3"/><path d="m21 12 6-4v13l-6-4"/></svg><strong>페이스톡 해요</strong><span>응답 없음 · ${escapeHTML(time)}</span></button></div></div></div>`;
+  }
+  return `<div class="kk-msg ${kind}">${kind==='in'?`<div class="kk-miniavatar">${kkAvatarSvg}</div>`:''}<div class="kk-msg-body">${kind==='in'?'<div class="kk-sender">치트</div>':''}<div class="kk-bubbleline"><div class="kk-bubble">${escapeHTML(text)}</div><span class="kk-time">${escapeHTML(time)}</span>${unread?'<span class="kk-unread">1</span>':''}</div></div></div>`;
+ }).join('');
+ if(typingBubble){$('kkChatScroll').appendChild(typingBubble);typingBubble.classList.toggle('visible',!!wasTyping)}
+}
+function openKakao(){show('home');current='kakao';$('kakaoApp').classList.add('active');$('homebar').style.background='#111';$('homebar').style.zIndex='12';const status=document.querySelector('.status');status.classList.add('inphone');status.style.color='#000';status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');document.querySelector('.island').classList.add('inphone');renderKakao()}
+function openKakaoChat(){kkChatOpen=true;$('kkChat').classList.add('open');requestAnimationFrame(()=>$('kkChatScroll').scrollTop=$('kkChatScroll').scrollHeight)}
+function closeKakaoChat(){kkChatOpen=false;$('kkChat').classList.remove('open')}
+function openKakaoFaceTalk(){if(kkFaceActive)return;kkFaceActive=true;$('kkFaceTalk').classList.add('active');$('kkFaceStatus').textContent='페이스톡 연결 중…';clearTimeout(kkFaceTimer);kkFaceTimer=setTimeout(()=>{if(kkFaceActive){$('kkFaceStatus').textContent='응답 없음';kkFaceTimer=setTimeout(endKakaoFaceTalk,1300)}},2600)}
+function endKakaoFaceTalk(){clearTimeout(kkFaceTimer);kkFaceActive=false;$('kkFaceTalk').classList.remove('active')}
+function closeKakao(){endKakaoFaceTalk();closeKakaoChat();$('kakaoApp').classList.remove('active');$('homebar').style.background='white';$('homebar').style.zIndex='8';const status=document.querySelector('.status');status.classList.remove('inphone');status.style.color='';status.querySelector('.status-right')?.style.removeProperty('filter');document.querySelector('.island').classList.remove('inphone');current='home'}
+$('kkOpenChat').onclick=openKakaoChat;$('kkBack').onclick=closeKakaoChat;$('kkCall').onclick=openKakaoFaceTalk;$('kkHangup').onclick=endKakaoFaceTalk;
+$('kkChatScroll').addEventListener('click',e=>{if(e.target.closest('[data-facetalk]'))openKakaoFaceTalk()});
+
+/* V15: keyword-triggered local fictional KakaoTalk replies and simulated incoming call. */
+const KK_SAVE_KEY='patch_iphone_kakao_v15';
+let kkExtraMessages=[];
+try{const saved=JSON.parse(localStorage.getItem(KK_SAVE_KEY)||'[]');if(Array.isArray(saved))kkExtraMessages=saved.filter(v=>Array.isArray(v)&&v.length>=3).slice(-250)}catch(e){}
+const kkReplyTimers=new Set();
+let kkReplyQueue=Promise.resolve(),kkTypingCount=0;
+function kkPersist(){try{localStorage.setItem(KK_SAVE_KEY,JSON.stringify(kkExtraMessages.slice(-250)))}catch(e){}}
+function kkTimeNow(){return new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:false})}
+function kkAddMessage(kind,text,unread=false){
+ kkExtraMessages.push([kind,text,kkTimeNow(),unread]);
+ kkPersist();renderKakao();requestAnimationFrame(()=>{$('kkChatScroll').scrollTop=$('kkChatScroll').scrollHeight});
+ if(kind==='out'){$('kkOpenChat').querySelector('.kk-preview').textContent=text}
+}
+function kkWait(ms){return new Promise(resolve=>{const t=setTimeout(()=>{kkReplyTimers.delete(t);resolve()},ms);kkReplyTimers.add(t)})}
+function kkNormalise(text){return text.toLowerCase().replace(/\s+/g,'').replace(/[~!?.♥♡ㅠㅜ]+/g,'')}
+function kkChoose(a){return a[Math.floor(Math.random()*a.length)]}
+function kkGetReply(raw){
+ const q=kkNormalise(raw).replace(/선배님|선배|패치/g,'');
+ if(q.includes('목소리')&&(q.includes('듣고싶')||q.includes('들려')||q.includes('듣고'))){return {call:true}}
+ if(q.includes('보고싶'))return {lines:[['조금 전에도 보지 않았나.',1700],[kkChoose(['내가 그쪽으로 가지.','집으로 오게.']),2300]]}
+ if(q.includes('사랑해')||q.includes('사랑합니다'))return {lines:[['근무 시간에는 업무에 집중하게.',1900],['나도.',5000]]}
+ if(q.includes('딸기칩'))return {lines:[['또 그 타령인가.',2100]]}
+ if(q.includes('뭐하')||q.includes('뭐하고')||q.includes('무엇하'))return {lines:[[kkChoose(['보고서 검토 중일세.','아이템 배치 시뮬레이션 중일세.']),2000]]}
+ if(q.includes('키스'))return {lines:Math.random()<.25?[]:[[kkChoose(['헛소리.','달리 할 짓이 없나?']),2200]]}
+ return {lines:[]}; // unmatched messages are left unanswered
+}
+function kkSetTyping(visible){
+ const typing=$('kkTyping'), scroll=$('kkChatScroll');
+ if(visible){scroll.appendChild(typing);typing.classList.add('visible');}
+ else typing.classList.remove('visible');
+ requestAnimationFrame(()=>{scroll.scrollTop=scroll.scrollHeight});
+}
+async function kkDeliverReplies(reply){
+ if(reply.call){await kkWait(2100);kkClearReadMarks();kkBeginIncoming();return}
+ for(const [line,delay] of reply.lines){
+  kkSetTyping(true);
+  await kkWait(delay);
+  kkSetTyping(false);
+  kkClearReadMarks();
+  kkAddMessage('in',line);
+  await kkWait(420);
+ }
+}
+function kkClearReadMarks(){
+ let dirty=false;
+ for(const msg of kkExtraMessages){if(msg[0]==='out'&&msg[3]){msg[3]=false;dirty=true}}
+ if(dirty){kkPersist();renderKakao()}
+}
+function kkSendText(){
+ const input=$('kkTextInput');const raw=input.value.trim();
+ if(!raw)return;
+ input.value='';input.blur();input.closest('.kk-compose').classList.remove('has-text');
+ kkAddMessage('out',raw,true);
+ const reply=kkGetReply(raw);
+ kkReplyQueue=kkReplyQueue.then(()=>kkDeliverReplies(reply)).catch(()=>kkSetTyping(false));
+}
+$('kkTextInput').addEventListener('input',e=>e.target.closest('.kk-compose').classList.toggle('has-text',!!e.target.value.trim()));
+$('kkTextInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();kkSendText()}});
+$('kkSend').addEventListener('click',kkSendText);
+let kkIncomingTick=null,kkIncomingStart=0,kkIncomingIndex=-1,kkIncomingActive=false,kkIncomingTransition=null;
+const kkIncomingLines=['대리님~','지금 통화 괜찮으십니까?','아뇨, 급한 일은 아니고요.','그냥 대리님 목소리가 듣고 싶어서요~','하하, 알겠습니다.','업무 끝나시면 연락 주세요.','기다리고 있겠습니다.'];
+function kkBeginIncoming(){
+ kkIncomingIndex=-1;kkIncomingActive=false;
+ $('kkIncoming').classList.add('visible');
+ $('kkIncomingActive').classList.remove('visible');
+ $('kkIncomingSubtitle').innerHTML='';
+ $('homebar').style.zIndex='8';$('homebar').style.background='white';
+ const status=document.querySelector('.status');status.style.color='white';
+ status.querySelector('.status-right')?.style.setProperty('filter','brightness(0) invert(1)');
+}
+function kkAnswerIncoming(){
+ $('kkIncoming').classList.remove('visible');
+ $('kkIncomingActive').classList.add('visible');
+ kkIncomingActive=true;kkIncomingStart=Date.now();kkIncomingIndex=-1;
+ $('kkIncomingTimer').textContent='00:00';
+ clearInterval(kkIncomingTick);
+ kkIncomingTick=setInterval(()=>{
+  const seconds=Math.floor((Date.now()-kkIncomingStart)/1000);
+  $('kkIncomingTimer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+ },250);
+ kkShowIncomingLine();
+}
+function kkShowIncomingLine(){
+ if(!kkIncomingActive)return;
+ if(kkIncomingIndex>=kkIncomingLines.length-1){kkEndIncoming();return}
+ kkIncomingIndex++;
+ const target=$('kkIncomingSubtitle');const old=target.querySelector('span');
+ if(old)old.classList.remove('visible');
+ clearTimeout(kkIncomingTransition);
+ kkIncomingTransition=setTimeout(()=>{
+  if(!kkIncomingActive)return;
+  target.innerHTML='<span>'+escapeHTML(kkIncomingLines[kkIncomingIndex])+'</span>';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>target.querySelector('span')?.classList.add('visible')));
+ },old?300:20);
+}
+function kkEndIncoming(){
+ if(!kkIncomingActive&&!$('kkIncoming').classList.contains('visible'))return;
+ kkIncomingActive=false;clearInterval(kkIncomingTick);clearTimeout(kkIncomingTransition);
+ $('kkIncomingSubtitle').querySelector('span')?.classList.remove('visible');
+ $('kkIncomingTimer').textContent='통화 종료';
+ setTimeout(()=>{
+  $('kkIncomingActive').classList.remove('visible');$('kkIncoming').classList.remove('visible');
+  const status=document.querySelector('.status');status.style.color='#000';
+  status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');
+  $('homebar').style.background='#111';$('homebar').style.zIndex='12';
+ },1000);
+}
+$('kkIncomingActive').addEventListener('click',e=>{if(e.target.closest('.kk-in-control-grid'))return;kkShowIncomingLine()});
+$('kkIncomingHangup').addEventListener('click',kkEndIncoming);
+let kkSwipeStartX=null,kkSwipeMoved=0;
+const kkSwipe=$('kkSwipe'),kkThumb=$('kkSwipeThumb');
+kkSwipe.addEventListener('pointerdown',e=>{kkSwipeStartX=e.clientX;kkSwipeMoved=0;kkSwipe.setPointerCapture(e.pointerId)});
+kkSwipe.addEventListener('pointermove',e=>{
+ if(kkSwipeStartX===null)return;
+ kkSwipeMoved=Math.max(0,Math.min(kkSwipe.clientWidth-68,e.clientX-kkSwipeStartX));
+ kkThumb.style.transform=`translateX(${kkSwipeMoved}px)`;
+});
+kkSwipe.addEventListener('pointerup',e=>{
+ if(kkSwipeStartX===null)return;
+ const shouldAnswer=kkSwipeMoved>Math.min(100,(kkSwipe.clientWidth-68)*.5);
+ kkSwipeStartX=null;kkSwipeMoved=0;kkThumb.style.transform='';
+ if(shouldAnswer)kkAnswerIncoming();
+});
+kkSwipe.addEventListener('pointercancel',()=>{kkSwipeStartX=null;kkThumb.style.transform=''});
+// Also support a click for keyboard and desktop testing.
+kkSwipe.addEventListener('click',e=>{if(e.detail===0)kkAnswerIncoming()});
+</script>
+</body></html>
