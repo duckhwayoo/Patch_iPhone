@@ -320,12 +320,43 @@
  #messagesApp .m-thread-scroll{top:132px!important}
 }
 </style>
-</head>
+<style id="patch-v3">
+/* Lock shortcut used to sit underneath the reminder widget, peeking out as a white tab. */
+#home #lockButton{display:none!important}
+#home .widgets{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;width:100%!important}
+#home .widgets>.widget{width:100%!important;max-width:none!important;min-width:0!important;overflow:hidden!important}
+/* Compact contact detail: the phone app's fixed header and bottom inset are accounted for. */
+#phoneApp .pbody:has(.pdetail){top:48px!important;bottom:0!important;overflow:auto!important}
+#phoneApp .pbody .pdetail{min-height:100%;padding:42px 17px 30px!important;display:flex;flex-direction:column;align-items:stretch;gap:0}
+#phoneApp .pdetail .avatar{width:88px!important;height:88px!important;font-size:39px!important;margin:22px auto 9px!important}
+#phoneApp .pdetail h2{font-size:23px!important;margin:0 0 10px!important}
+#phoneApp .pdetail .back{width:31px!important;height:31px!important;position:absolute;top:15px;left:16px;display:grid;place-items:center}
+#phoneApp .pdetail .back svg{width:18px;height:18px}
+#phoneApp .pdetail .pactions{gap:12px!important;margin:9px 0 13px!important}
+#phoneApp .pdetail .pactions button{width:49px!important;height:49px!important;font-size:20px!important}
+#phoneApp .pdetail .pactions svg{width:22px;height:22px}
+#phoneApp .pdetail .pdetailcard{padding:11px 13px!important;border-radius:16px!important;margin:6px 0!important;font-size:12px!important;line-height:1.45!important}
+#phoneApp .pdetail .pdetailcard span{font-size:14px!important}
+#phoneApp .pdetail .pdetailcard .callnumber{font-size:15px!important}
+#phoneApp:has(.pdetail) .phead{display:none!important}
+#lock .date{margin-top:120px!important}
+@media(max-height:650px){
+ #phoneApp .pdetail .avatar{width:68px!important;height:68px!important;font-size:30px!important;margin:8px auto!important}
+ #phoneApp .pdetail .pactions button{width:43px!important;height:43px!important}
+ #phoneApp .pbody .pdetail{padding-top:30px!important}
+}
+</style><style id="patch-v4">
+#kakaoApp .kk-inbox{display:none!important}
+#kakaoApp .kk-chat{display:block!important}
+#kakaoApp .kk-msg .kk-bubble{font-size:13px!important;padding:7px 10px!important;line-height:1.42!important}
+#kakaoApp .kk-chatname{max-width:60%;font-size:17px}
+#kakaoApp .kk-chat-scroll{padding-bottom:25px}
+</style></head>
 <body>
 <div class="phone">
 <div class="wall"></div><div class="island"></div>
 <div class="status" aria-label="상태 표시줄"><div class="status-left"><span class="carrier">GOV</span><svg width="17" height="18" viewBox="0 0 24 24" aria-label="무음" role="img"><path d="M17 9V7a5 5 0 0 0-8.5-3.5M6.6 7.5C6.2 8.6 6 9.8 6 11v3l-2 3h14M10 21h4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 3l18 18" stroke="white" stroke-width="2.4" stroke-linecap="round"/></svg></div><div class="status-right"><svg width="20" height="17" viewBox="0 0 20 17" aria-label="셀룰러 신호" role="img"><rect x="0" y="11" width="3.5" height="6" rx="1.5" fill="white"/><rect x="5.5" y="8" width="3.5" height="9" rx="1.5" fill="white"/><rect x="11" y="4" width="3.5" height="13" rx="1.5" fill="white"/><rect x="16.5" y="0" width="3.5" height="17" rx="1.5" fill="white"/></svg><svg width="32" height="17" viewBox="0 0 36 19" aria-label="배터리 80%" role="img"><rect x="1" y="1" width="30" height="17" rx="5" fill="none" stroke="white" stroke-opacity=".85" stroke-width="1.5"/><rect x="3.2" y="3.1" width="23.5" height="12.8" rx="3.1" fill="white"/><path d="M33 6.2c2 1 2 5.5 0 6.5" fill="none" stroke="white" stroke-opacity=".7" stroke-width="2" stroke-linecap="round"/><text x="15" y="13.6" text-anchor="middle" font-size="10.5" font-family="-apple-system,Arial" font-weight="800" fill="#555">80</text></svg></div></div>
-<section id="lock" class="view" aria-label="잠금 화면"><div class="lockicon">🔓</div><div class="date" id="lockDate"></div><div class="clock" id="lockTime">9:41</div><div class="hint">화면을 탭하거나 위로 스와이프하세요</div><div class="lockbottom"><button class="circle" type="button" id="flashlightButton" aria-label="손전등 켜기" title="손전등"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 3h12v5H10zM10.5 10h11l-2.5 6v11.5a2.5 2.5 0 0 1-2.5 2.5h-1a2.5 2.5 0 0 1-2.5-2.5V16z" fill="currentColor"/><circle cx="16" cy="23.5" r="1.6" fill="#777"/></svg></button><button class="circle" type="button" id="cameraButton" aria-label="카메라 열기" title="카메라"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7l2.2-3h7.6L22 7h4a3.5 3.5 0 0 1 3.5 3.5v15A3.5 3.5 0 0 1 26 29H6a3.5 3.5 0 0 1-3.5-3.5v-15A3.5 3.5 0 0 1 6 7z" fill="currentColor"/><circle cx="16" cy="17.5" r="7.1" fill="#747880"/><circle cx="16" cy="17.5" r="4.8" fill="currentColor"/><circle cx="25.5" cy="11.2" r="1.2" fill="#747880"/></svg></button></div></section>
+<section id="lock" class="view" aria-label="잠금 화면"><div class="date" id="lockDate"></div><div class="clock" id="lockTime">9:41</div><div class="hint">화면을 탭하거나 위로 스와이프하세요</div><div class="lockbottom"><button class="circle" type="button" id="flashlightButton" aria-label="손전등 켜기" title="손전등"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 3h12v5H10zM10.5 10h11l-2.5 6v11.5a2.5 2.5 0 0 1-2.5 2.5h-1a2.5 2.5 0 0 1-2.5-2.5V16z" fill="currentColor"/><circle cx="16" cy="23.5" r="1.6" fill="#777"/></svg></button><button class="circle" type="button" id="cameraButton" aria-label="카메라 열기" title="카메라"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 7l2.2-3h7.6L22 7h4a3.5 3.5 0 0 1 3.5 3.5v15A3.5 3.5 0 0 1 26 29H6a3.5 3.5 0 0 1-3.5-3.5v-15A3.5 3.5 0 0 1 6 7z" fill="currentColor"/><circle cx="16" cy="17.5" r="7.1" fill="#747880"/><circle cx="16" cy="17.5" r="4.8" fill="currentColor"/><circle cx="25.5" cy="11.2" r="1.2" fill="#747880"/></svg></button></div></section>
 <section id="pass" class="view hidden" aria-label="비밀번호 입력"><div class="passTitle">암호 입력</div><div class="dots" id="dots"></div><div class="error" id="error"></div><div class="keypad" id="keypad"></div></section>
 <section id="home" class="view hidden" aria-label="홈 화면"><button class="lockbtn" id="lockButton">🔒 잠그기</button><div class="widgets"><div class="widget"><small id="widgetDate">금요일</small><strong id="widgetDay">23</strong><small class="widget-event">현장 순찰 · 점검</small></div><div class="widget reminder-widget"><div class="reminder-title"><span class="reminder-dot">✓</span> 미리 알림</div><ul class="reminder-list"><li>현장 점검표 확인</li><li>아이템 배치표 검수</li><li>교대조 일정 전달</li></ul></div></div><div class="apps" id="apps"></div><div class="dock" id="dock"></div></section>
 
@@ -419,7 +450,7 @@ const keys=['1','2','3','4','5','6','7','8','9','','0','⌫'];$('keypad').innerH
 function toastMessage(message){/* Disabled: no placeholder or unimplemented-feature messages. */}
 $('flashlightButton').addEventListener('click',e=>{e.stopPropagation()});
 $('cameraButton').addEventListener('click',e=>{e.stopPropagation()});
-$('lock').addEventListener('click',e=>{if(e.target.closest('.lockbottom'))return;show('home')});let touchStart=0;$('lock').addEventListener('touchstart',e=>touchStart=e.touches[0].clientY,{passive:true});$('lock').addEventListener('touchend',e=>{if(touchStart-e.changedTouches[0].clientY>35)show('home')},{passive:true});$('lockButton').onclick=()=>show('lock');$('homebar').onclick=()=>{if(current==='kakao'){if(kkFaceActive)endKakaoFaceTalk();else if(kkChatOpen)closeKakaoChat();else closeKakao();}else if(current==='photos'){closePhotos();}else if(current==='phone'){closePhone();}else if(current==='messages'){if(activeMessageThread!==null)closeMessageThread();else closeMessages();}else if(current==='home')show('lock');else if(current==='lock')show('home');else show('lock')};
+$('lock').addEventListener('click',e=>{if(e.target.closest('.lockbottom'))return;show('home')});let touchStart=0;$('lock').addEventListener('touchstart',e=>touchStart=e.touches[0].clientY,{passive:true});$('lock').addEventListener('touchend',e=>{if(touchStart-e.changedTouches[0].clientY>35)show('home')},{passive:true});$('lockButton').onclick=()=>show('lock');$('homebar').onclick=()=>{if(current==='kakao'){if(kkFaceActive)endKakaoFaceTalk();else closeKakao();}else if(current==='photos'){closePhotos();}else if(current==='phone'){closePhone();}else if(current==='messages'){if(activeMessageThread!==null)closeMessageThread();else closeMessages();}else if(current==='home')show('lock');else if(current==='lock')show('home');else show('lock')};
 const iconSVG={
 '설정':'<g fill="none" stroke="#6a6e75" stroke-width="7"><circle cx="32" cy="32" r="15"/><circle cx="32" cy="32" r="7" fill="#8b9099" stroke="none"/></g><path fill="#777c85" d="M27 5h10l2 7 6 3 7-3 7 8-4 6 1 7 6 5-4 10-8-1-5 5-1 8H27l-2-8-6-4-8 1-4-10 6-5 1-7-4-6 7-8 7 3 6-3z" fill-rule="evenodd" opacity=".8"/><circle cx="32" cy="32" r="12" fill="#d9dce1"/><circle cx="32" cy="32" r="6" fill="#707780"/>',
 '날씨':'<circle cx="39" cy="22" r="12" fill="#ffd343"/><path d="M16 46h33a11 11 0 0 0-3-21 17 17 0 0 0-31 6A8 8 0 0 0 16 46" fill="#fff"/>',
@@ -453,7 +484,23 @@ const SENIOR='치트';
 const contactData=[
 ['치트','전담 조수 · 즐겨찾기'],['크레인 인사팀장님','인사팀장'],['헌츠맨 인사차장님','인사차장'],['스매쉬 인사과장님','인사과장'],['마스코트','스포츠게임부서'],['커맨더','시뮬레이션게임부서'],['니트로','레이싱게임부서'],['포인트 앤 클릭','어드벤처게임부서'],['EQ','리듬게임부서'],['뷸렛','슈팅게임부서'],['킬데스','FPS게임부서'],['다이스','RPG게임부서'],['직소','퍼즐게임부서'],['콤보','액션게임부서'],['어그로','액션게임부서'],['모바일게임부서 직원 A','현장 직원'],['모바일게임부서 직원 B','현장 직원'],['모바일게임부서 직원 C','현장 직원'],['모바일게임부서 직원 D','현장 직원'],['모바일게임부서 직원 E','현장 직원'],['모바일게임부서 직원 F','현장 직원']
 ];
-const lines=['선배님~','현장 점검은 잘 마치셨습니까?','제가 정리해둔 아이템 배치표는 확인하셨고요?','아, 물론입니다. 선배님 말씀대로 처리했죠.','그런데 선배님.','오늘도 너무 무리하시는 거 아닙니까?','…그냥 걱정돼서요.','하하, 알겠습니다. 보고서 들고 올라가겠습니다.'];
+const lines=[
+'선배님~♥',
+'선배님께서 먼저 전화를 다 주시고',
+'해가 서쪽에서 뜨려나 봅니다. 하하.',
+'…에이, 연하 남친 서운하게 바로 일 얘기 하시는 겁니까?',
+'회사에서는 자제하라고요?',
+'모니터링실에는 저밖에 없는 거 알고 계시잖습니까.',
+'…',
+'아, 물론입니다. 선배님 말씀대로 처리했죠.',
+'…',
+'그런데 선배님.',
+'오늘 퇴근하고 데이트 약속 잊으신 거 아니죠?',
+'…♥',
+'네에.',
+'이따 봬요.',
+'먼저 끊어주십쇼.'
+];
 const svgIcon=(name)=>({
 phone:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.32.56 3.57.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02z"/></svg>',
 message:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C6.48 3 2 6.86 2 11.63c0 2.4 1.14 4.58 3 6.15L4.4 21l3.5-1.9A11.5 11.5 0 0 0 12 20.3c5.52 0 10-3.86 10-8.67C22 6.86 17.52 3 12 3Z"/></svg>',
@@ -489,15 +536,15 @@ if(callName){head.textContent='';$('pLeft').style.visibility='hidden';$('pRight'
 <div class="calltool"><button data-action="end" aria-label="통화 종료"><span class="endcall"><svg viewBox="0 0 32 32"><path d="M4 14q12-9 24 0l-2 6-6-2v-4q-4-2-8 0v4l-6 2Z" stroke="none"/></svg></span>종료</button></div>
 <div class="calltool"><span><svg viewBox="0 0 32 32" fill="white" stroke="none">${Array.from({length:9},(_,i)=>`<circle cx="${9+(i%3)*7}" cy="${9+Math.floor(i/3)*7}" r="2.5"/>`).join('')}</svg></span>키패드</div>
 </div></div>`;return}
-if(detailName){head.textContent='연락처';$('pLeft').textContent='‹';$('pRight').textContent='편집';body.innerHTML=`<div class="pdetail"><button class="back" data-action="back" aria-label="뒤로">${svgIcon('back')}</button>${avatarFor(SENIOR)}<h2>치트</h2><div class="pactions"><button disabled title="메시지">${svgIcon('message')}</button><button data-action="call" data-name="${SENIOR}" title="전화">${svgIcon('phone')}</button><button disabled title="FaceTime">${svgIcon('video')}</button><button disabled title="메일">${svgIcon('mail')}</button></div><div class="pdetailcard"><b>휴대전화</b><span><button class="callnumber" data-action="call" data-name="${SENIOR}">010-xxxx-0000</button></span></div><div class="pdetailcard"><b>메모</b><span>즐겨찾기</span></div></div>`;return}
+if(detailName){head.textContent='연락처';$('pLeft').textContent='‹';$('pRight').textContent='편집';body.innerHTML=`<div class="pdetail"><button class="back" data-action="back" aria-label="뒤로">${svgIcon('back')}</button>${avatarFor(SENIOR)}<h2>치트</h2><div class="pactions"><button disabled title="메시지">${svgIcon('message')}</button><button data-action="call" data-name="${SENIOR}" title="전화">${svgIcon('phone')}</button><button disabled title="FaceTime">${svgIcon('video')}</button><button disabled title="메일">${svgIcon('mail')}</button></div><div class="pdetailcard"><b>휴대전화</b><span><button class="callnumber" data-action="call" data-name="${SENIOR}">010-xxxx-0283</button></span></div><div class="pdetailcard"><b>메모</b><span>즐겨찾기</span></div></div>`;return}
 $('pLeft').textContent='편집';$('pRight').textContent=phoneTab==='contacts'?'+':'☷';head.textContent={recent:'통화',contacts:'연락처',keypad:'',search:'검색'}[phoneTab];
 if(phoneTab==='recent'){body.innerHTML=callLog.map(([name,when,direction,unanswered])=>`<div class="prow" ${name!==SENIOR?'data-inert="true"':''}>${avatarFor(name)}<div class="pinfo" ${name===SENIOR?`data-action="call" data-name="${SENIOR}" role="button" tabindex="0"`:''}><div class="pname ${direction==='in'&&unanswered?'pmissed':''}">${escapeHTML(name)}</div><div class="psub"><span class="callarrow">${direction==='out'?'↗':'↙'}</span>${unanswered?(direction==='out'?'응답 없음':'부재중 전화'):'전화번호'}</div></div><div class="ptime">${escapeHTML(when)}</div><button class="pcallbtn" ${name===SENIOR?`data-action="call" data-name="${SENIOR}"`:'disabled'} aria-label="${escapeHTML(name)} 전화">${svgIcon('phone')}</button></div>`).join('');return}
 if(phoneTab==='contacts'||phoneTab==='search'){let contacts=contactData.filter(c=>phoneTab!=='search'||c[0].toLowerCase().includes(searchTerm.toLowerCase()))
  .sort((a,b)=>a[0]===SENIOR?-1:b[0]===SENIOR?1:a[0].localeCompare(b[0],'ko-KR'));body.innerHTML=(phoneTab==='search'?`<input class="psearchinput" id="pSearchInput" placeholder="연락처 검색" value="${escapeHTML(searchTerm)}"/>`:'')+contacts.map((c,i)=>`${c[0]===SENIOR&&phoneTab==='contacts'?'<div class="psection">★ 즐겨찾기</div>':''}<button class="prow pcontactrow" ${c[0]===SENIOR?`data-action="detail" data-name="${SENIOR}"`:'data-inert="true"'}>${avatarFor(c[0])}<div class="pinfo"><div class="pname">${escapeHTML(c[0])}</div><div class="psub">${escapeHTML(c[1])}</div></div>${c[0]===SENIOR?'<span class="pstar">★</span>':''}</button>`).join('');if(phoneTab==='search'){$('pSearchInput').addEventListener('input',e=>{searchTerm=e.target.value;let cursor=e.target.selectionStart;renderPhone();$('pSearchInput').focus();$('pSearchInput').setSelectionRange(cursor,cursor)})}return}
 const chars=['','ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ','','+',''];const digits=['1','2','3','4','5','6','7','8','9','*','0','#'];body.innerHTML=`<div class="pkeyscreen"><div class="pnumber">${escapeHTML(dialNumber)||'&nbsp;'}</div><div class="pkeys">${digits.map((d,i)=>`<button class="pkey" data-action="digit" data-digit="${d}">${d}<small>${chars[i]||'&nbsp;'}</small></button>`).join('')}</div><div style="position:relative;width:100%;text-align:center"><button class="pcallgreen" data-action="dial" aria-label="전화 걸기">${svgIcon('phone')}</button><button class="pdelete" data-action="delete" aria-label="삭제">⌫</button></div></div>`;
 }
-function startVirtualCall(name){if(name!==SENIOR)return;clearCallTimers();callName=SENIOR;callConnected=false;callEnding=false;lineIndex=-1;callLog.unshift([SENIOR,'방금','out',false]);renderPhone();callConnectTimer=setTimeout(()=>{if(callName!==SENIOR)return;callConnected=true;callStartedAt=Date.now();const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(callName===SENIOR){state.textContent='00:00';state.classList.remove('switching')}},270)}const hint=$('callHint');if(hint)hint.style.display='block';callTicker=setInterval(()=>{if(!callName)return;let secs=Math.floor((Date.now()-callStartedAt)/1000);let label=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');if($('callState'))$('callState').textContent=label},250)},3000)}
-function showCallLine(){if(callEnding||!callConnected)return;if(lineIndex>=lines.length-1){endVirtualCall();return}lineIndex++;clearTimeout(subtitleTimer);const area=$('callSubtitle');if(!area)return;const old=area.querySelector('span');if(old)old.classList.remove('visible');subtitleTimer=setTimeout(()=>{if(!callName||callEnding)return;const line=lines[lineIndex];
+function startVirtualCall(name){if(name!==SENIOR)return;clearCallTimers();callName=SENIOR;callConnected=false;callEnding=false;lineIndex=-1;callLog.unshift([SENIOR,'방금','out',false]);renderPhone();callConnectTimer=setTimeout(()=>{if(callName!==SENIOR)return;callConnected=true;callStartedAt=Date.now();const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(callName===SENIOR){state.textContent='00:00';state.classList.remove('switching')}},270)}const hint=$('callHint');if(hint)hint.style.display='block';callTicker=setInterval(()=>{if(!callName)return;let secs=Math.floor((Date.now()-callStartedAt)/1000);let label=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');if($('callState'))$('callState').textContent=label},250)},180)}
+function showCallLine(){if(callEnding||!callConnected)return;if(lineIndex>=lines.length-1){return}lineIndex++;clearTimeout(subtitleTimer);const area=$('callSubtitle');if(!area)return;const old=area.querySelector('span');if(old)old.classList.remove('visible');subtitleTimer=setTimeout(()=>{if(!callName||callEnding)return;const line=lines[lineIndex];
 const cinematicBreaks={
 '근무 시간에 이딴 용건으로 전화 걸지 말게.':'근무 시간에 이딴 용건으로\\n전화 걸지 말게.',
 '자네가 오늘 하루 딸기칩 타령 없이 근무를 잘 마무리한다면 말이야.':'자네가 오늘 하루 딸기칩 타령 없이\\n근무를 잘 마무리한다면 말이야.',
@@ -505,7 +552,19 @@ const cinematicBreaks={
 };
 const displayed=cinematicBreaks[line]||line;
 area.innerHTML=`<span>${displayed.split('\\n').map(part=>`<span class="lyric-line">${escapeHTML(part)}</span>`).join('')}</span>`;requestAnimationFrame(()=>requestAnimationFrame(()=>area.querySelector('span')?.classList.add('visible')))},old?260:10)}
-function endVirtualCall(){if(callEnding||!callName)return;callEnding=true;clearCallTimers();const area=$('callSubtitle');if(area)area.querySelector('span')?.classList.remove('visible');const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(!callName)return;state.textContent='통화 종료';state.classList.remove('switching')},220)}$('activeCall')?.classList.add('ending');finishTimer=setTimeout(()=>{callName=null;callConnected=false;callEnding=false;detailName=null;phoneTab='recent';renderPhone()},1250)}
+let patchReturnCallTimer=null,patchReturnCallDone=false;
+function endVirtualCall(){if(callEnding||!callName)return;callEnding=true;clearCallTimers();const area=$('callSubtitle');if(area)area.querySelector('span')?.classList.remove('visible');const state=$('callState');if(state){state.classList.add('switching');setTimeout(()=>{if(!callName)return;state.textContent='통화 종료';state.classList.remove('switching')},220)}$('activeCall')?.classList.add('ending');finishTimer=setTimeout(()=>{
+ callName=null;callConnected=false;callEnding=false;detailName=null;phoneTab='recent';renderPhone();
+ if(!patchReturnCallDone){
+  patchReturnCallDone=true;
+  clearTimeout(patchReturnCallTimer);
+  patchReturnCallTimer=setTimeout(()=>{
+   if(callName)return;
+   closePhone();
+   kkBeginIncoming();
+  },1750);
+ }
+},1250)}
 $('pNav').innerHTML=`<div class="pnavmain"><button data-tab="recent"><span class="navico">${svgIcon('clock')}</span>통화</button><button data-tab="contacts"><span class="navico">${svgIcon('contact')}</span>연락처</button></div><button class="psearch" data-tab="search" aria-label="검색">${svgIcon('search')}</button>`;
 $('pNav').addEventListener('click',e=>{let t=e.target.closest('[data-tab]');if(t)tabPhone(t.dataset.tab)});
 $('pBody').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(callName){if(b?.dataset.action==='end'){e.stopPropagation();endVirtualCall();return}if(b?.dataset.action==='mute'){e.stopPropagation();b.closest('.calltool')?.classList.toggle('muted');return}showCallLine();return}if(!b)return;let action=b.dataset.action,name=b.dataset.name;if(action==='detail'){if(name===SENIOR){detailName=name;renderPhone()}}else if(action==='call'){startVirtualCall(name)}else if(action==='back'){detailName=null;renderPhone()}else if(action==='digit'){if(dialNumber.length<22)dialNumber+=b.dataset.digit;renderPhone()}else if(action==='delete'){dialNumber=dialNumber.slice(0,-1);renderPhone()}else if(action==='dial'){/* Other numbers intentionally do nothing. */}});
@@ -660,21 +719,53 @@ function closePhotos(){
 /* V14 KakaoTalk: one pinned fictional conversation, with FaceTalk history. */
 const kkAvatarSvg='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="18" r="9" fill="#e5f4ff"/><path d="M8 42c1-14 31-14 32 0" fill="#e5f4ff"/></svg>';
 const kkMessages=[
-['day','2026년 10월 16일 금요일'],
-['out','뿌엥에에ㅠㅠㅠ','10:02'],['out','선배님ㅠㅠㅠ','10:02'],['out','보고싶어요ㅠㅠㅠ','10:03'],['out','선배님안아주새요','10:03'],['out','선배님저만나면안아주셔야해요ㅠㅠㅠ','10:04'],
-['out','선배님 금일 ㅇㅇ보고서 수정 완료했습니다.','11:07'],['in','수고했네.','11:16'],
-['day','2026년 10월 17일 토요일'],
-['out','선배님 집에 샴푸 다 써가시던데요~','18:42'],['out','오늘 퇴근 후에 장 보러 가시죠?','18:42'],['in','그건 또 어떻게 알았나.','18:46'],['in','알겠네.','18:46'],['out','선배님 집에서 씻는 거 한두번도 아닌데 당연히 알지 말입니다~♥','18:48'],
-['day','2026년 10월 18일 일요일'],
-['out','선배님','21:10'],['out','진짜','21:10'],['out','저도 참는데 한개가 있습니다','21:11'],['in','한개가 아니라 한계일세','21:13'],['out','됐어요','21:13'],['out','바보','21:13'],['out','벽창호','21:14'],['out','둔탱이','21:14'],
-['day','2026년 10월 19일 월요일'],
-['out','선배님','15:25'],['out','이에로사이다 없다는데요~?','15:25'],['in','?','15:29'],['in','뭔 말이지','15:29'],['out','모르시면 됐어요…','15:30'],
-['day','2026년 10월 20일 화요일'],
-['out','선배님 뭐하고 계심까~~♥♥','22:06'],['in','씻으려고.','22:08'],['call','페이스톡 해요','22:08'],['reject','거절','22:08'],['call','페이스톡 해요','22:09'],['reject','거절','22:09'],['out','선ㅂ배님','22:09'],['out','저도','22:09'],['out','저도 같이해요','22:09'],['in','닥쳐','22:10'],
-['day','2026년 10월 21일 수요일'],
-['out','선배님 먼작귀 극장판 개봉했다는데 같이 보러가시겠슴까~?♥','23:03'],['in','먼작귀가 뭔가','23:05'],['out','먼가 작고 귀여운 녀석이라는 뜻입니다^^','23:05'],['in','자네는 작지 않네','23:06'],['out','예?','23:06'],['in','귀엽지도 않지','23:07'],['out','예에?ㅠㅠㅠㅠ','23:07'],['in','내일 신작게임 베타테스트 진행하는 날이니까 잠이나 일찍 자게.','23:08'],['out','선배님 바보ㅠㅠㅠ 둔탱이ㅠㅠㅠ 벽창호ㅠㅠㅠ','23:08'],
-['day','2026년 10월 22일 목요일'],
-['in','치트','18:31'],['in','이따가 올 때 그것 좀 사다줄 수 있겠나','18:31'],['out','그거요?','18:33'],['out','제가 쿠팡으로 대량주문해놨지 말입니다~♥','18:33'],['in','그딴 거 말고','18:34'],['in','참기름 사오라고','18:34'],['out','넵','18:34']
+ ['day','2026년 10월 23일 금요일'],
+ ['out','프사 바꿔.','09:14'],
+ ['in','왜요 ㅠㅠㅠㅠ','09:15'],
+ ['in','잘 나왔는데','09:15'],
+ ['in','귀엽지 않습니까?','09:15'],
+ ['out','28살 남성이 자는 사진을 왜 프사로 하나.','09:17'],
+ ['out','회사 사람들이 본다고.','09:17'],
+ ['in','선배님 이거 멀프예요ㅠ','09:18'],
+ ['out','멀프가 뭔가.','09:19'],
+ ['in','…','09:19'],
+ ['in','진심이세요?','09:20'],
+ ['day','2026년 10월 24일 토요일'],
+ ['in','선배님 어디 계세요~ㅠㅠ','10:32'],
+ ['in','자고 일어났는데','10:32'],
+ ['in','옆에 안 계시면 서운하죠','10:33'],
+ ['in','저 먹버하는 거 아니시죠','10:33'],
+ ['out','ㅁ무슨','10:36'],
+ ['out','제발 그런 단어 좀 쓰지 말게.','10:36'],
+ ['out','애초에 사귀는 사이인데 왜 먹버를 하겠나.','10:37'],
+ ['out','잠깐 마트 왔으니까 얌전히 기다리고 있어','10:37'],
+ ['in','ㅎㅎ','10:38'],
+ ['in','깨워서 같이 가시지ㅠㅠㅠㅠㅠ','10:38'],
+ ['out','너무 곤히 자길래.','10:39'],
+ ['out','그냥 더 자고있게.','10:39'],
+ ['in','ㅎㅎ','10:40'],
+ ['in','옷 입었어요','10:40'],
+ ['in','금방 갈게요~','10:40'],
+ ['day','2026년 10월 25일 일요일'],
+ ['in','선배님~','18:11'],
+ ['in','냉장고에 딸기우유 두고 갔습니다^^','18:11'],
+ ['out','그걸 왜 우리 집에 두고 갔나.','18:16'],
+ ['in','선배님 드시라고요~','18:16'],
+ ['out','자네가 좋아하는 거 아닌가.','18:18'],
+ ['in','그럼 다음에 같이 마시면 되겠네요ㅎㅎ','18:18'],
+ ['out','내일 출근은 늦지 말게.','18:20'],
+ ['in','네에~♥','18:20'],
+ ['day','2026년 10월 26일 월요일'],
+ ['out','내일 오전 회의 자료 수정했나?','20:05'],
+ ['in','넵~ 방금 최종본 올렸습니다.','20:06'],
+ ['in','근데 선배님 아직 회사십니까?','20:06'],
+ ['out','조금만 더 정리하고 퇴근할 걸세.','20:08'],
+ ['in','그럼 저도 기다리겠습니다~','20:08'],
+ ['out','먼저 가게. 기다릴 필요 없네.','20:09'],
+ ['in','싫은데요ㅎㅎ','20:09'],
+ ['in','선배님 퇴근하시면 같이 저녁 먹어요.','20:10'],
+ ['out','…알겠네.','20:12'],
+ ['in','역시 선배님♥','20:12']
 ];
 let kkChatOpen=false,kkFaceActive=false,kkFaceTimer=null;
 function renderKakao(){
@@ -690,13 +781,13 @@ function renderKakao(){
  }).join('');
  if(typingBubble){$('kkChatScroll').appendChild(typingBubble);typingBubble.classList.toggle('visible',!!wasTyping)}
 }
-function openKakao(){show('home');current='kakao';$('kakaoApp').classList.add('active');$('homebar').style.background='#111';$('homebar').style.zIndex='12';const status=document.querySelector('.status');status.classList.add('inphone');status.style.color='#000';status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');document.querySelector('.island').classList.add('inphone');renderKakao()}
+function openKakao(){show('home');current='kakao';$('kakaoApp').classList.add('active');$('homebar').style.background='#111';$('homebar').style.zIndex='12';const status=document.querySelector('.status');status.classList.add('inphone');status.style.color='#000';status.querySelector('.status-right')?.style.setProperty('filter','brightness(0)');document.querySelector('.island').classList.add('inphone');renderKakao();openKakaoChat()}
 function openKakaoChat(){kkChatOpen=true;$('kkChat').classList.add('open');requestAnimationFrame(()=>$('kkChatScroll').scrollTop=$('kkChatScroll').scrollHeight)}
 function closeKakaoChat(){kkChatOpen=false;$('kkChat').classList.remove('open')}
 function openKakaoFaceTalk(){if(kkFaceActive)return;kkFaceActive=true;$('kkFaceTalk').classList.add('active');$('kkFaceStatus').textContent='페이스톡 연결 중…';clearTimeout(kkFaceTimer);kkFaceTimer=setTimeout(()=>{if(kkFaceActive){$('kkFaceStatus').textContent='응답 없음';kkFaceTimer=setTimeout(endKakaoFaceTalk,1300)}},2600)}
 function endKakaoFaceTalk(){clearTimeout(kkFaceTimer);kkFaceActive=false;$('kkFaceTalk').classList.remove('active')}
 function closeKakao(){endKakaoFaceTalk();closeKakaoChat();$('kakaoApp').classList.remove('active');$('homebar').style.background='white';$('homebar').style.zIndex='8';const status=document.querySelector('.status');status.classList.remove('inphone');status.style.color='';status.querySelector('.status-right')?.style.removeProperty('filter');document.querySelector('.island').classList.remove('inphone');current='home'}
-$('kkOpenChat').onclick=openKakaoChat;$('kkBack').onclick=closeKakaoChat;$('kkCall').onclick=openKakaoFaceTalk;$('kkHangup').onclick=endKakaoFaceTalk;
+$('kkOpenChat').onclick=openKakaoChat;$('kkBack').onclick=closeKakao;$('kkCall').onclick=openKakaoFaceTalk;$('kkHangup').onclick=endKakaoFaceTalk;
 $('kkChatScroll').addEventListener('click',e=>{if(e.target.closest('[data-facetalk]'))openKakaoFaceTalk()});
 
 /* V15: keyword-triggered local fictional KakaoTalk replies and simulated incoming call. */
@@ -752,14 +843,21 @@ function kkSendText(){
  if(!raw)return;
  input.value='';input.blur();input.closest('.kk-compose').classList.remove('has-text');
  kkAddMessage('out',raw,true);
- const reply=kkGetReply(raw);
+ const reply=[];
  kkReplyQueue=kkReplyQueue.then(()=>kkDeliverReplies(reply)).catch(()=>kkSetTyping(false));
 }
 $('kkTextInput').addEventListener('input',e=>e.target.closest('.kk-compose').classList.toggle('has-text',!!e.target.value.trim()));
 $('kkTextInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();kkSendText()}});
 $('kkSend').addEventListener('click',kkSendText);
 let kkIncomingTick=null,kkIncomingStart=0,kkIncomingIndex=-1,kkIncomingActive=false,kkIncomingTransition=null;
-const kkIncomingLines=['대리님~','지금 통화 괜찮으십니까?','아뇨, 급한 일은 아니고요.','그냥 대리님 목소리가 듣고 싶어서요~','하하, 알겠습니다.','업무 끝나시면 연락 주세요.','기다리고 있겠습니다.'];
+const kkIncomingLines=[
+'선배님',
+'아까 이 말을 못하고 끊어서요.',
+'보고싶어요.',
+'사랑해요.',
+'…',
+'네에…♥'
+];
 function kkBeginIncoming(){
  kkIncomingIndex=-1;kkIncomingActive=false;
  $('kkIncoming').classList.add('visible');
@@ -783,7 +881,7 @@ function kkAnswerIncoming(){
 }
 function kkShowIncomingLine(){
  if(!kkIncomingActive)return;
- if(kkIncomingIndex>=kkIncomingLines.length-1){kkEndIncoming();return}
+ if(kkIncomingIndex>=kkIncomingLines.length-1){return}
  kkIncomingIndex++;
  const target=$('kkIncomingSubtitle');const old=target.querySelector('span');
  if(old)old.classList.remove('visible');
@@ -792,6 +890,9 @@ function kkShowIncomingLine(){
   if(!kkIncomingActive)return;
   target.innerHTML='<span>'+escapeHTML(kkIncomingLines[kkIncomingIndex])+'</span>';
   requestAnimationFrame(()=>requestAnimationFrame(()=>target.querySelector('span')?.classList.add('visible')));
+  if(kkIncomingIndex===kkIncomingLines.length-1){
+   kkIncomingTransition=setTimeout(()=>{if(kkIncomingActive)kkEndIncoming()},2300);
+  }
  },old?300:20);
 }
 function kkEndIncoming(){
